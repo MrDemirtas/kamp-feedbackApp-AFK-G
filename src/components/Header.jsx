@@ -7,17 +7,29 @@ import { Data } from "../App";
 export default function Header() {
   const { data } = useContext(Data);
   const [screenSize, setScreenSize] = useState(window.innerWidth);
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
     window.addEventListener("resize", () => setScreenSize(window.innerWidth));
   }, []);
 
-  return <>{screenSize > 768 ? <HeaderTablet /> : <HeaderMobile data={data} />}</>;
+  return (
+  <>
+    {screenSize > 768 ? 
+      <HeaderTablet /> 
+      : 
+      <HeaderMobile
+        data={data} 
+        selectedCategory={selectedCategory} 
+        setSelectedCategory={setSelectedCategory} 
+      />
+    }
+  </>
+  );
 }
 
-function HeaderMobile({ data }) {
+function HeaderMobile({ data, selectedCategory, setSelectedCategory }) {
   const [hamburger, setHamburger] = useState(false);
-  const dialogRef = useRef(null);
 
   return (
     <>
@@ -35,9 +47,16 @@ function HeaderMobile({ data }) {
         <div className="hamburger-menu-container">
           <div className="hamburger-menu-contents">
             <div className="hamburger-menu-categories">
-              <button className="hamburger-menu-category active">All</button>
+              <button 
+                className={"hamburger-menu-category" + (selectedCategory === "All" ? " active" : "")} 
+                onClick={() => setSelectedCategory("All")}>
+                All
+              </button>
               {data.categories.map((category, index) => (
-                <button key={index} className="hamburger-menu-category">
+                <button 
+                  key={index} 
+                  className={"hamburger-menu-category" + (selectedCategory === category ? " active" : "")}
+                  onClick={() => setSelectedCategory(category)}>
                   {category}
                 </button>
               ))}
