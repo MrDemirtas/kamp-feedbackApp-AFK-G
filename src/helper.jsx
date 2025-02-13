@@ -5,23 +5,27 @@ import Suggestions from "./components/Suggestions";
 
 const routers = [
   {
-    "url": "/",
-    "component": <Suggestions />
+    url: "/",
+    component: <Suggestions />,
   },
   {
-    "url": "/feedback",
-    "component": <FeedbackDetail />
+    url: "/feedback",
+    component: <FeedbackDetail />,
   },
   {
-    "url": "/roadmap",
-    "component": <Roadmap />
+    url: "/roadmap",
+    component: <Roadmap />,
   },
   {
-    "url": "/feedback-form",
-    "component": <FeedbackForm />
-  }
+    url: "/new-feedback",
+    component: <FeedbackForm />,
+  },
+  {
+    url: "/edit-feedback",
+    component: <FeedbackForm isEdit={true} />,
+  },
 ];
 
 export function getPage(url) {
-  return routers.find(router => router.url === url)?.component || <h1>404 Not Found</h1>;
+  return routers.find((router) => router.url === url)?.component || <h1>404 Not Found</h1>;
 }
