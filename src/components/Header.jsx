@@ -1,17 +1,10 @@
 import "../css/header.css";
 
-import { useContext, useEffect, useRef, useState } from "react";
+import { Data, ScreenSize } from "../App";
+import { useContext, useState } from "react";
 
-import { Data } from "../App";
-
-export default function Header() {
-  const { data } = useContext(Data);
-  const [screenSize, setScreenSize] = useState(window.innerWidth);
-  const [selectedCategory, setSelectedCategory] = useState("All");
-
-  useEffect(() => {
-    window.addEventListener("resize", () => setScreenSize(window.innerWidth));
-  }, []);
+export default function Header({ selectedCategory, setSelectedCategory }) {
+  const screenSize = useContext(ScreenSize);
 
   return (
   <>
@@ -19,7 +12,6 @@ export default function Header() {
       <HeaderTablet /> 
       : 
       <HeaderMobile
-        data={data} 
         selectedCategory={selectedCategory} 
         setSelectedCategory={setSelectedCategory} 
       />
@@ -28,7 +20,8 @@ export default function Header() {
   );
 }
 
-function HeaderMobile({ data, selectedCategory, setSelectedCategory }) {
+function HeaderMobile({ selectedCategory, setSelectedCategory }) {
+  const { data } = useContext(Data);
   const [hamburger, setHamburger] = useState(false);
 
   return (
@@ -64,7 +57,7 @@ function HeaderMobile({ data, selectedCategory, setSelectedCategory }) {
             <div className="hamburger-menu-roadmap">
               <div className="hamburger-menu-roadmap-header">
                 <h2>Roadmap</h2>
-                <a href="#">View</a>
+                <a href="#/roadmap">View</a>
               </div>
               <ul>
                 {data.statuses.map((roadmap, index) => (
@@ -85,5 +78,7 @@ function HeaderMobile({ data, selectedCategory, setSelectedCategory }) {
 }
 
 function HeaderTablet() {
+  const { data } = useContext(Data);
+
   return <header></header>;
 }
