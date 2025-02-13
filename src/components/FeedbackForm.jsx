@@ -7,9 +7,8 @@ export default function FeedbackForm({ isEdit = false }) {
   const { data, setData } = useContext(Data);
   const route = useContext(Route);
   const titleRef = useRef(null);
-  const categoryRef = useRef(null);
-  const statusRef = useRef(null);
   const descriptionRef = useRef(null);
+  const dialogRef = useRef(null);
   const [edittingFeedback, setEdittingFeedback] = useState(isEdit ? data.feedbacks.find((feedback) => feedback.id === route.split("/").at(-1)) : null);
   const [formCategory, setFormCategory] = useState({
     show: false,
@@ -79,8 +78,10 @@ export default function FeedbackForm({ isEdit = false }) {
   }
 
   function handleDelete() {
+    dialogRef.current.close();
     data.feedbacks = data.feedbacks.filter((feedback) => feedback.id !== edittingFeedback.id);
     setData({ ...data });
+    location.hash = "/";
   }
 
   return (
@@ -159,13 +160,33 @@ export default function FeedbackForm({ isEdit = false }) {
               Cancel
             </button>
             {isEdit && (
-              <button onClick={handleDelete} className="feedback-form-btn-delete" type="button">
+              <button onClick={() => dialogRef.current.showModal()} className="feedback-form-btn-delete" type="button">
                 Delete
               </button>
             )}
           </div>
         </div>
       </form>
+      <DeleteDialog dialogRef={dialogRef} handleDelete={handleDelete} />
     </div>
+  );
+}
+
+function DeleteDialog({ dialogRef, handleDelete }) {
+  return (
+    <dialog ref={dialogRef} className="delete-dialog">
+      <div className="dialog-container">
+        <h3>Delete this feedback?</h3>
+        <p>
+          Are you sure you want to delete this feedback? This action cannot be undone and you will lose all of its data.
+        </p>
+        <button className="delete-dialog-btn" onClick={handleDelete}>
+          Confirm & Delete
+        </button>
+        <button className="cancel-dialog-btn" onClick={() => dialogRef.current.close()}>
+          Cancel
+        </button>
+      </div>
+    </dialog>
   );
 }
