@@ -9,7 +9,7 @@ export default function App() {
   const [data, setData] = useState(null);
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const [route, setRoute] = useState(location.hash.substring(1) || "/");
-  console.log(data);
+
   useEffect(() => {
     fetch("/data/feedback-data.json")
       .then((response) => response.json())

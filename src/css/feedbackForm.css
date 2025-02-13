@@ -112,14 +112,14 @@
 .feedback-form-btn-cancel {
   background-color: #3a4374;
   &:hover {
-    background-color: #656EA3;
+    background-color: #656ea3;
   }
 }
 
 .feedback-form-btn-delete {
   background-color: #d73737;
-  &:hover{
-    background-color: #E98888;
+  &:hover {
+    background-color: #e98888;
   }
 }
 
@@ -139,11 +139,13 @@
     justify-content: space-between;
     padding: 12px 24px;
     border: none;
-    border-bottom: 1px solid rgba(58, 67, 116, 0.15);
     background-color: transparent;
     font-size: 16px;
     line-height: 23.12px;
     color: #647196;
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(58, 67, 116, 0.15);
+    }
     &:hover {
       color: #ad1fea;
     }

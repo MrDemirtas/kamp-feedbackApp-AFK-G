@@ -10,27 +10,29 @@ export default function FeedbackForm({ isEdit = false }) {
   const categoryRef = useRef(null);
   const statusRef = useRef(null);
   const descriptionRef = useRef(null);
-  const [edittingFeedback, setEdittingFeedback] = useState(isEdit ? data.feedbacks.find((feedback) => feedback.id === parseInt(route.split("/").at(-1))) : null);
+  const [edittingFeedback, setEdittingFeedback] = useState(isEdit ? data.feedbacks.find((feedback) => feedback.id === route.split("/").at(-1)) : null);
   const [formCategory, setFormCategory] = useState({
     show: false,
-    value: (isEdit && edittingFeedback) ? edittingFeedback.category : data.categories[0],
+    value: isEdit && edittingFeedback ? edittingFeedback.category : data.categories[0],
   });
   const [formStatus, setFormStatus] = useState({
     show: false,
-    value: (isEdit && edittingFeedback) ? edittingFeedback.status : "Planned",
+    value: isEdit && edittingFeedback ? edittingFeedback.status : "Planned",
   });
 
   useEffect(() => {
     if (isEdit) {
-      setEdittingFeedback(isEdit ? data.feedbacks.find((feedback) => feedback.id === parseInt(route.split("/").at(-1))) : null);
+      setEdittingFeedback(isEdit ? data.feedbacks.find((feedback) => feedback.id === route.split("/").at(-1)) : null);
+    }else{
+      location.hash = "/new-feedback";
     }
     setFormCategory({
       show: false,
-      value: (isEdit && edittingFeedback) ? edittingFeedback.category : data.categories[0],
+      value: isEdit && edittingFeedback ? edittingFeedback.category : data.categories[0],
     });
     setFormStatus({
       show: false,
-      value: (isEdit && edittingFeedback) ? edittingFeedback.status : "Planned",
+      value: isEdit && edittingFeedback ? edittingFeedback.status : "Planned",
     });
   }, [route]);
 
@@ -56,15 +58,15 @@ export default function FeedbackForm({ isEdit = false }) {
 
     if (isEdit) {
       edittingFeedback.title = formObj.title;
-      edittingFeedback.category = formObj.category;
-      edittingFeedback.status = formObj.status;
+      edittingFeedback.category = formCategory.value;
+      edittingFeedback.status = formStatus.value;
       edittingFeedback.description = formObj.description;
     } else {
       const newFeedbackObj = {
-        id: 1,
+        id: crypto.randomUUID(),
         title: formObj.title,
         description: formObj.description,
-        category: formObj.category,
+        category: formCategory.value,
         upvotes: 0,
         status: "Planned",
         comments: [],
@@ -83,7 +85,7 @@ export default function FeedbackForm({ isEdit = false }) {
 
   return (
     <div className="feedback-form-container">
-      <button className="go-back-button">
+      <button className="go-back-button" onClick={() => (location.hash = "/")}>
         <img src="/images/right-arrow.svg" />
         Go Back
       </button>
@@ -151,7 +153,7 @@ export default function FeedbackForm({ isEdit = false }) {
           </section>
           <div className="feedback-form-btn-group">
             <button className="feedback-form-btn-submit" type="submit">
-              Add Feedback
+              {isEdit ? "Save Changes" : "Add Feedback"}
             </button>
             <button className="feedback-form-btn-cancel" type="button">
               Cancel
