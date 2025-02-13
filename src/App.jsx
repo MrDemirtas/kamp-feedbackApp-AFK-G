@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
+import Header from "./components/Header";
+
+export const Data = createContext(null);
 export default function App() {
   const [data, setData] = useState(null);
 
@@ -10,7 +13,8 @@ export default function App() {
   }, []);
 
   return (
-    <>
-    </>
+    <Data.Provider value={{ data, setData }}>
+      <Header />
+    </Data.Provider>
   );
 }

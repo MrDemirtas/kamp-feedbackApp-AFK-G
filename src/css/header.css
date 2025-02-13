@@ -1,0 +1,141 @@
+header {
+  padding: 16px 24px;
+  background: radial-gradient(128.88% 128.88% at 103.9% -10.39%, #e84d70 0%, #a337f6 53.09%, #28a7ed 100%);
+}
+
+.header-mobile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  label {
+    display: flex;
+    cursor: pointer;
+    input {
+      appearance: none;
+    }
+  }
+  h1 {
+    font-size: 15px;
+    line-height: 21.68px;
+    letter-spacing: -0.19px;
+    color: #fff;
+  }
+  p {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18.79px;
+    color: rgba(255, 255, 255, 0.75);
+  }
+}
+
+.hamburger-menu-container {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: calc(100vh - 72.46px);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hamburger-menu-contents {
+  height: 100%;
+  width: 70%;
+  margin-left: auto;
+  background-color: #f7f8fd;
+  display: grid;
+  align-items: start;
+  grid-auto-rows: max-content;
+  gap: 24px;
+  padding: 24px;
+}
+
+.hamburger-menu-categories {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 24px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hamburger-menu-category {
+  padding: 5px 16px;
+  background-color: #f2f4ff;
+  color: #4661e6;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 18.79px;
+  border-radius: 10px;
+  border: none;
+  &.active {
+    background-color: #4661e6;
+    color: #fff;
+  }
+}
+
+.hamburger-menu-roadmap {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 24px;
+  display: grid;
+  gap: 24px;
+  ul {
+    padding-left: 16px;
+    display: grid;
+    gap: 8px;
+    li:nth-child(1) {
+      &::marker {
+        color: #f49f85;
+        font-size: 1.1em;
+      }
+    }
+    li:nth-child(2) {
+      &::marker {
+        color: #ad1fea;
+        font-size: 1.1em;
+      }
+    }
+    li:nth-child(3) {
+      &::marker {
+        color: #62bcfa;
+        font-size: 1.1em;
+      }
+    }
+  }
+}
+
+.hamburger-menu-roadmap-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  h2 {
+    font-size: 18px;
+    line-height: 26.01px;
+    letter-spacing: -0.25px;
+    color: #3a4374;
+  }
+  a {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 18.79px;
+    color: #4661e6;
+  }
+}
+
+.hamburger-menu-roadmap-item {
+  display: flex;
+  justify-content: space-between;
+  span {
+    &:first-child {
+      font-size: 16px;
+      line-height: 23.12px;
+      color: #647196;
+    }
+    &:last-child {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 23.12px;
+      color: #647196;
+    }
+  }
+}
