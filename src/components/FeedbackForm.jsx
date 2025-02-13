@@ -22,7 +22,7 @@ export default function FeedbackForm({ isEdit = false }) {
   useEffect(() => {
     if (isEdit) {
       setEdittingFeedback(isEdit ? data.feedbacks.find((feedback) => feedback.id === route.split("/").at(-1)) : null);
-    }else{
+    } else {
       location.hash = "/new-feedback";
     }
     setFormCategory({
@@ -56,6 +56,10 @@ export default function FeedbackForm({ isEdit = false }) {
     const formObj = Object.fromEntries(formData);
 
     if (isEdit) {
+      if (edittingFeedback.status !== formStatus.value) {
+        data.statuses.find((x) => x.name === edittingFeedback.status).count--;
+        data.statuses.find((x) => x.name === formStatus.value).count++;
+      }
       edittingFeedback.title = formObj.title;
       edittingFeedback.category = formCategory.value;
       edittingFeedback.status = formStatus.value;
@@ -86,7 +90,7 @@ export default function FeedbackForm({ isEdit = false }) {
 
   return (
     <div className="feedback-form-container">
-      <button className="go-back-button" onClick={() => (location.hash = "/")}>
+      <button className="go-back-button" onClick={() => (location.hash = isEdit ? `/feedback/${edittingFeedback.id}` : "/")}>
         <img src="/images/right-arrow.svg" />
         Go Back
       </button>
@@ -156,7 +160,7 @@ export default function FeedbackForm({ isEdit = false }) {
             <button className="feedback-form-btn-submit" type="submit">
               {isEdit ? "Save Changes" : "Add Feedback"}
             </button>
-            <button className="feedback-form-btn-cancel" onClick={() => location.hash = isEdit ? `/feedback/${edittingFeedback.id}` : "/"} type="button">
+            <button className="feedback-form-btn-cancel" onClick={() => (location.hash = isEdit ? `/feedback/${edittingFeedback.id}` : "/")} type="button">
               Cancel
             </button>
             {isEdit && (
@@ -177,9 +181,7 @@ function DeleteDialog({ dialogRef, handleDelete }) {
     <dialog ref={dialogRef} className="delete-dialog">
       <div className="dialog-container">
         <h3>Delete this feedback?</h3>
-        <p>
-          Are you sure you want to delete this feedback? This action cannot be undone and you will lose all of its data.
-        </p>
+        <p>Are you sure you want to delete this feedback? This action cannot be undone and you will lose all of its data.</p>
         <button className="delete-dialog-btn" onClick={handleDelete}>
           Confirm & Delete
         </button>
