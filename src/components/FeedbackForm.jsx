@@ -95,7 +95,7 @@ export default function FeedbackForm({ isEdit = false }) {
           <img src={isEdit ? "/images/pen.svg" : "/images/plus.svg"} />
         </figure>
         <div className="feedback-form-contents">
-          <h1>Create New Feedback</h1>
+          <h1>{isEdit ? `Editing ‘${edittingFeedback.title}’` : "Create New Feedback"}</h1>
           <section>
             <div className="feedback-form-input-text">
               <h4>Feedback Title</h4>
@@ -156,7 +156,7 @@ export default function FeedbackForm({ isEdit = false }) {
             <button className="feedback-form-btn-submit" type="submit">
               {isEdit ? "Save Changes" : "Add Feedback"}
             </button>
-            <button className="feedback-form-btn-cancel" type="button">
+            <button className="feedback-form-btn-cancel" onClick={() => location.hash = isEdit ? `/feedback/${edittingFeedback.id}` : "/"} type="button">
               Cancel
             </button>
             {isEdit && (
