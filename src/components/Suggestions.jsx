@@ -3,40 +3,40 @@ import { useContext, useEffect, useState } from "react";
 import "../css/suggestions.css";
 import { Data } from "../App";
 
-
-
 export default function Suggestions() {
   const { data, setData } = useContext(Data);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [suggestions, setSuggestions] = useState(data.feedbacks);
   const [sortBy, setSortBy] = useState('');
 
-
   useEffect(() => {
-    if (suggestions.length > 0) {
-      let sortedSuggestions = [...suggestions];
-      switch (sortBy) {
-        case 'mostUpvotes':
-          sortedSuggestions.sort((a, b) => b.upvotes - a.upvotes);
-          break;
-        case 'leastUpvotes':
-          sortedSuggestions.sort((a, b) => a.upvotes - b.upvotes);
-          break;
-        case 'mostComments':
-          sortedSuggestions.sort((a, b) => b.comments.length - a.comments.length);
-          break;
-        case 'leastComments':
-          sortedSuggestions.sort((a, b) => a.comments.length - b.comments.length);
-          break;
-        default:
-          sortedSuggestions = data.feedbacks;
-          break;
-      }
-      setSuggestions(sortedSuggestions);
+    let filteredSuggestions = [...data.feedbacks];
+    
+    if (selectedCategory !== "All") {
+      filteredSuggestions = filteredSuggestions.filter(
+        feedback => feedback.category === selectedCategory
+      );
     }
 
-  }, [sortBy])
-
+    if (sortBy) {
+      switch (sortBy) {
+        case 'mostUpvotes':
+          filteredSuggestions.sort((a, b) => b.upvotes - a.upvotes);
+          break;
+        case 'leastUpvotes':
+          filteredSuggestions.sort((a, b) => a.upvotes - b.upvotes);
+          break;
+        case 'mostComments':
+          filteredSuggestions.sort((a, b) => b.comments.length - a.comments.length);
+          break;
+        case 'leastComments':
+          filteredSuggestions.sort((a, b) => a.comments.length - b.comments.length);
+          break;
+      }
+    }
+    
+    setSuggestions(filteredSuggestions);
+  }, [selectedCategory, sortBy, data.feedbacks]);
 
   const handleUpvote = (feedbackId) => {
     if (data.currentUser.myUpvotes.includes(feedbackId)) {
@@ -64,10 +64,10 @@ export default function Suggestions() {
         <button onClick={() => location.hash = `/new-feedback`}>+ Add Feedback</button>
       </div>
       <div className="feedbacks-container">
-        {suggestions.map(x => (
+        {suggestions.length > 0 ? suggestions.map(x => (
           <div key={x.id} className="feedback-item">
             <h4 onClick={() => location.hash = `/feedback/${x.id}`}>{x.title}</h4>
-            <p>{x.description}</p>
+            <p onClick={() => location.hash = `/feedback/${x.id}`}>{x.description}</p>
             <p>{x.category}</p>
             <div className="item-upvotes-comment">
               <p className={data.currentUser.myUpvotes.includes(x.id) ? "active" : ""} onClick={() => handleUpvote(x.id)}>
@@ -82,7 +82,17 @@ export default function Suggestions() {
               </a>
             </div>
           </div>
-        ))}
+        ))
+        :
+        (
+          <div className="null-page">
+            <img src="\public\images\null-page.svg" alt="" />
+            <h4>There is no feedback yet.</h4>
+            <p>Got a suggestion? Found a bug that needs to be squashed? We love hearing about new ideas to improve our app.</p>
+            <button onClick={() => location.hash = `/new-feedback`}>+ Add Feedback</button>
+          </div>
+        )
+        }
       </div>
     </>
   );

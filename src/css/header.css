@@ -1,3 +1,7 @@
+body:has(.hamburger-menu-container){
+  overflow: hidden;
+}
+
 header {
   padding: 16px 24px;
   background: radial-gradient(128.88% 128.88% at 103.9% -10.39%, #e84d70 0%, #a337f6 53.09%, #28a7ed 100%);

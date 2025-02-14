@@ -10,7 +10,6 @@ body {
   padding: 8px 24px 8px 24px;
   margin-bottom: 32px;
   background-color: #373F68;
-  position: relative;
 }
 
 .select-feedback label {
@@ -38,6 +37,10 @@ body {
   font-size: 16px;
   font-weight: 400;
   cursor: pointer;
+}
+
+.select-feedback select option:nth-child(1) {
+  color: rgb(178, 177, 177);
 }
 
 .select-feedback select option:hover,
@@ -83,12 +86,17 @@ body {
   color: #3A4374;
   margin: 0 0 10px 0;
   font-size: 18px;
+  cursor: pointer;
 }
 
 .feedback-item p {
   color: #647196;
   margin: 0 0 15px 0;
   font-size: 16px;
+}
+
+.feedback-item p:first-of-type {
+  cursor: pointer;
 }
 
 .feedback-item p:nth-child(3) {
@@ -135,4 +143,50 @@ body {
   gap: 4px;
   cursor: pointer;
   user-select: none;
+}
+
+.null-page {
+  margin-inline: 24px;
+  padding: 76px 24px;
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img{
+    margin-bottom: 39px;
+  }
+  h4{
+    margin-bottom: 14px;
+
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 26.01px;
+    letter-spacing: -0.25px;
+    text-align: center;    
+    color: #3A4374;
+  }
+  p{
+    margin-bottom: 24px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18.79px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #3A4374;
+  }
+  button{
+    background-color: #AD1FEA;
+    color: #F2F4FE;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 18.79px;
+  }
+  button:hover {
+    background-color: #C75AF6;
+  }
 }
