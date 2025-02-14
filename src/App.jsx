@@ -21,7 +21,7 @@ export default function App() {
   return (
     <ScreenSize.Provider value={screenSize}>
       <Data.Provider value={{ data, setData }}>
-        {getPage(route)}
+        {data && getPage(route)}
       </Data.Provider>
     </ScreenSize.Provider>
   );

@@ -1,4 +1,11 @@
 {
+  "currentUser": {
+    "id": 1,
+    "name": "Alex",
+    "username": "@alex",
+    "image": "images/user-images/user-alex.jpg",
+    "myUpvotes": []
+  },
   "feedbacks": [
     {
       "id": 1,
@@ -13,6 +20,7 @@
           "author": "Jamas Skinner",
           "content": "Second this! I do a lot of late night coding and reading...",
           "username": "@jamesskinner",
+          "image": "images/user-images/user-jamesskinner.jpg",
           "timestamp": "2025-02-13T10:14:22Z",
           "replies": [
             {
@@ -20,6 +28,7 @@
               "author": "Anne Valentine",
               "content": "@jamesskinner While waiting for dark mode...",
               "username": "@annev1990",
+              "image": "images/user-images/user-annev1990.jpg",
               "timestamp": "2025-02-13T10:14:37Z"
             }
           ]
@@ -48,6 +57,7 @@
           "author": "Ryan Welles",
           "content": "This would be really helpful for beginners.",
           "username": "@voyager.344",
+          "image": "images/user-images/user-voyager344.jpg",
           "timestamp": "2025-02-13T10:15:00Z",
           "replies": []
         }
