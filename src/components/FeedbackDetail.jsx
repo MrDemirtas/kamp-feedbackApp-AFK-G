@@ -62,12 +62,12 @@ export default function FeedbackDetail() {
         <a href={`#/edit-feedback/${currentFeedback.id}`}>Edit Feedback</a>
       </div>
       <div className="card">
-        <h4>add a dark theme option</h4>
-        <p>It would help people with light sensitivities and who prefer dark mode.</p>
-        <button>Feature</button>
+        <h4>{currentFeedback.title}</h4>
+        <p>{currentFeedback.description}</p>
+        <button>{currentFeedback.category}</button>
         <div className="card-footer">
-          <span>99</span>
-          <span>4</span>
+          <span>{currentFeedback.upvotes}</span>
+          <span>{currentFeedback.comments?.length}</span>
         </div>
       </div>
       <div className="feedback-comments">
