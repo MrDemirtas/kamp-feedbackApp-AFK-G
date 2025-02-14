@@ -1,7 +1,13 @@
 {
+  "currentUser": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "name": "Alex",
+    "username": "@alex",
+    "image": "images/user-images/user-alex.jpg"
+  },
   "feedbacks": [
     {
-      "id": 1,
+      "id": "550e8400-e29b-41d4-a716-446655440001",
       "title": "Add a dark theme option",
       "description": "It would help people with light sensitivities and who prefer dark mode.",
       "category": "Feature",
@@ -9,34 +15,55 @@
       "status": "InProgress",
       "comments": [
         {
-          "id": 1,
+          "id": "550e8400-e29b-41d4-a716-446655440002",
           "author": "Jamas Skinner",
           "content": "Second this! I do a lot of late night coding and reading...",
           "username": "@jamesskinner",
+          "image": "images/user-images/user-jamesskinner.jpg",
           "timestamp": "2025-02-13T10:14:22Z",
           "replies": [
             {
-              "id": 1,
+              "id": "550e8400-e29b-41d4-a716-446655440003",
               "author": "Anne Valentine",
               "content": "@jamesskinner While waiting for dark mode...",
               "username": "@annev1990",
+              "image": "images/user-images/user-annev1990.jpg",
               "timestamp": "2025-02-13T10:14:37Z"
             }
           ]
+        },
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440004",
+          "author": "John Doe",
+          "content": "Dark theme is a must-have feature for any modern app!",
+          "username": "@johndoe",
+          "image": "images/user-images/user-johndoe.jpg",
+          "timestamp": "2025-02-14T09:00:00Z",
+          "replies": []
         }
       ]
     },
     {
-      "id": 2,
+      "id": "550e8400-e29b-41d4-a716-446655440005",
       "title": "Add tags for solutions",
       "description": "Easier to search for solutions based on a specific stack.",
       "category": "Enhancement",
       "upvotes": 112,
       "status": "Planned",
-      "comments": []
+      "comments": [
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440006",
+          "author": "Jane Smith",
+          "content": "This would be incredibly useful for organizing solutions!",
+          "username": "@janesmith",
+          "image": "",
+          "timestamp": "2025-02-14T10:00:00Z",
+          "replies": []
+        }
+      ]
     },
     {
-      "id": 3,
+      "id": "550e8400-e29b-41d4-a716-446655440007",
       "title": "Q&A within the challenge hubs",
       "description": "Challenge-specific Q&A would make for easy reference.",
       "category": "Feature",
@@ -44,82 +71,160 @@
       "status": "Planned",
       "comments": [
         {
-          "id": 2,
+          "id": "550e8400-e29b-41d4-a716-446655440008",
           "author": "Ryan Welles",
           "content": "This would be really helpful for beginners.",
           "username": "@voyager.344",
+          "image": "images/user-images/user-voyager344.jpg",
           "timestamp": "2025-02-13T10:15:00Z",
+          "replies": []
+        },
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440009",
+          "author": "Emily Johnson",
+          "content": "I agree, this would make learning much easier!",
+          "username": "@emilyj",
+          "image": "",
+          "timestamp": "2025-02-14T11:00:00Z",
           "replies": []
         }
       ]
     },
     {
-      "id": 4,
+      "id": "550e8400-e29b-41d4-a716-446655440010",
       "title": "Allow image/video upload",
       "description": "Images and screenshots can enhance comments on solutions.",
       "category": "Enhancement",
       "upvotes": 51,
       "status": "InProgress",
-      "comments": []
+      "comments": [
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440011",
+          "author": "Michael Brown",
+          "content": "This would make it easier to share visual solutions!",
+          "username": "@michaelb",
+          "image": "",
+          "timestamp": "2025-02-14T12:00:00Z",
+          "replies": []
+        }
+      ]
     },
     {
-      "id": 5,
+      "id": "550e8400-e29b-41d4-a716-446655440012",
       "title": "Ability to follow others",
       "description": "Stay updated on comments and solutions other people post.",
       "category": "Feature",
       "upvotes": 42,
       "status": "Live",
-      "comments": []
+      "comments": [
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440013",
+          "author": "Sarah Lee",
+          "content": "This would be great for networking with other developers!",
+          "username": "@sarahlee",
+          "image": "",
+          "timestamp": "2025-02-14T13:00:00Z",
+          "replies": []
+        }
+      ]
     },
     {
-      "id": 6,
+      "id": "550e8400-e29b-41d4-a716-446655440014",
       "title": "Preview images not loading",
       "description": "Challenge preview images are missing when you apply a filter.",
       "category": "Bug",
       "upvotes": 3,
       "status": "InProgress",
-      "comments": []
+      "comments": [
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440015",
+          "author": "David Wilson",
+          "content": "This is quite annoying, hope it gets fixed soon!",
+          "username": "@davidw",
+          "image": "",
+          "timestamp": "2025-02-14T14:00:00Z",
+          "replies": []
+        }
+      ]
     },
     {
-      "id": 7,
+      "id": "550e8400-e29b-41d4-a716-446655440016",
       "title": "One-click portfolio generation",
       "description": "Add ability to create professional looking portfolio from profile.",
       "category": "Feature",
       "upvotes": 62,
       "status": "InProgress",
-      "comments": []
+      "comments": [
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440017",
+          "author": "Laura Green",
+          "content": "This would save so much time for job applications!",
+          "username": "@laurag",
+          "image": "",
+          "timestamp": "2025-02-14T15:00:00Z",
+          "replies": []
+        }
+      ]
     },
     {
-      "id": 8,
+      "id": "550e8400-e29b-41d4-a716-446655440018",
       "title": "Bookmark challenges",
       "description": "Be able to bookmark challenges to take later on.",
       "category": "Feature",
       "upvotes": 31,
       "status": "InProgress",
-      "comments": []
+      "comments": [
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440019",
+          "author": "Chris Evans",
+          "content": "This would be very useful for organizing my learning!",
+          "username": "@chrise",
+          "image": "",
+          "timestamp": "2025-02-14T16:00:00Z",
+          "replies": []
+        }
+      ]
     },
     {
-      "id": 9,
+      "id": "550e8400-e29b-41d4-a716-446655440020",
       "title": "Animated solution screenshots",
       "description": "Screenshots of solutions with animations don’t display content.",
       "category": "Bug",
       "upvotes": 15,
       "status": "InProgress",
-      "comments": []
+      "comments": [
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440021",
+          "author": "Olivia Martinez",
+          "content": "This is a critical issue for sharing animated solutions!",
+          "username": "@oliviam",
+          "image": "",
+          "timestamp": "2025-02-14T17:00:00Z",
+          "replies": []
+        }
+      ]
     },
     {
-      "id": 10,
+      "id": "550e8400-e29b-41d4-a716-446655440022",
       "title": "Add more filter options",
       "description": "Include more filter options to refine search results.",
       "category": "Enhancement",
       "upvotes": 45,
       "status": "Planned",
-      "comments": []
+      "comments": [
+        {
+          "id": "550e8400-e29b-41d4-a716-446655440023",
+          "author": "Daniel Taylor",
+          "content": "More filters would definitely improve the user experience!",
+          "username": "@danielt",
+          "image": "",
+          "timestamp": "2025-02-14T18:00:00Z",
+          "replies": []
+        }
+      ]
     }
   ],
-  
   "categories": ["UI", "UX", "Enhancement", "Bug", "Feature"],
-  
   "statuses": [
     { "name": "Planned", "count": 3 },
     { "name": "InProgress", "count": 6 },

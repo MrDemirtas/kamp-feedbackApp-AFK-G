@@ -4,6 +4,7 @@ import { getPage } from "./helper";
 
 export const Data = createContext(null);
 export const ScreenSize = createContext(null);
+export const Route = createContext(null);
 export default function App() {
   const [data, setData] = useState(null);
   const [screenSize, setScreenSize] = useState(window.innerWidth);
@@ -19,10 +20,12 @@ export default function App() {
   }, []);
 
   return (
-    <ScreenSize.Provider value={screenSize}>
-      <Data.Provider value={{ data, setData }}>
-        {getPage(route)}
-      </Data.Provider>
-    </ScreenSize.Provider>
+    <Route.Provider value={route}>
+      <ScreenSize.Provider value={screenSize}>
+        <Data.Provider value={{ data, setData }}>
+          {data && getPage(route)}
+        </Data.Provider>
+      </ScreenSize.Provider>
+    </Route.Provider>
   );
 }

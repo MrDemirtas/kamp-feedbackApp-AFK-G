@@ -57,7 +57,7 @@ function HeaderMobile({ selectedCategory, setSelectedCategory }) {
             <div className="hamburger-menu-roadmap">
               <div className="hamburger-menu-roadmap-header">
                 <h2>Roadmap</h2>
-                <a href="#/roadmap">View</a>
+                <a href="#/feedback">View</a>
               </div>
               <ul>
                 {data.statuses.map((roadmap, index) => (
