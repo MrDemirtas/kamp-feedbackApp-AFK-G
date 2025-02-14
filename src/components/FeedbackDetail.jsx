@@ -58,7 +58,7 @@ export default function FeedbackDetail() {
   return (
     <div className="feedback-detail-container">
       <div className="feedback-detail-header">
-        <a href="/">Go back</a>
+        <a href="#/">Go back</a>
         <a href={`#/edit-feedback/${currentFeedback.id}`}>Edit Feedback</a>
       </div>
       <div className="card">
