@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../css/roadmap.css";
 
-const Roadmap = () => {
+function Roadmap() {
   const initialData = {
     currentUser: {
       id: 1,
@@ -37,7 +37,7 @@ const Roadmap = () => {
       .then((json) => setData(json));
   }, []);
 
-  const handleAddFeedback = () => {
+  function handleAddFeedback() {
     const newFeedback = {
       id: Date.now(),
       title: "New Feature",
@@ -47,13 +47,19 @@ const Roadmap = () => {
       status: activeTab,
       comments: [],
     };
-    setData((prevData) => ({
-      ...prevData,
-      feedbacks: [...prevData.feedbacks, newFeedback],
-    }));
-  };
+    setData((prevData) => {
+      const updatedStatuses = prevData.statuses.map((status) =>
+        status.name === activeTab ? { ...status, count: status.count + 1 } : status
+      );
+      return {
+        ...prevData,
+        feedbacks: [...prevData.feedbacks, newFeedback],
+        statuses: updatedStatuses,
+      };
+    });
+  }
 
-  const handleUpvote = (id) => {
+  function handleUpvote(id) {
     setData((prevData) => ({
       ...prevData,
       feedbacks: prevData.feedbacks.map((feedback) =>
@@ -62,78 +68,77 @@ const Roadmap = () => {
           : feedback
       ),
     }));
-  };
+  }
 
   return (
     <div className="container">
       <Header onAddFeedback={handleAddFeedback} />
-      <Tabs
-        statuses={data.statuses}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-      />
-      <main>
+      <Tabs statuses={data.statuses} activeTab={activeTab} setActiveTab={setActiveTab} />
+      <div className="selected-tab">
         <h2>
-          {activeTab} (
-          {data.feedbacks.filter((f) => f.status === activeTab).length})
+          {activeTab} ({data.feedbacks.filter((f) => f.status === activeTab).length})
         </h2>
         <p>Features currently being developed</p>
+      </div>
+      <main>
         {data.feedbacks
           .filter((f) => f.status === activeTab)
           .map((feedback) => (
-            <Card
-              key={feedback.id}
-              feedback={feedback}
-              onUpvote={handleUpvote}
-            />
+            <Card key={feedback.id} feedback={feedback} onUpvote={handleUpvote} />
           ))}
       </main>
     </div>
   );
-};
+}
 
-const Header = ({ onAddFeedback }) => (
-  <header>
-    <a href="#" className="back-btn">
-      <i className="fas fa-arrow-left"></i> Go Back
-    </a>
-    <button className="add-feedback" onClick={onAddFeedback}>
-      + Add Feedback
-    </button>
-  </header>
-);
+function Header({ onAddFeedback }) {
+  return (
+    <header>
+      <a href="#" className="back-btn">
+        <i className="fas fa-arrow-left"></i> Go Back
+      </a>
+      <button className="add-feedback" onClick={onAddFeedback}>
+        + Add Feedback
+      </button>
+    </header>
+  );
+}
 
-const Tabs = ({ statuses, activeTab, setActiveTab }) => (
-  <nav className="tabs">
-    {statuses.map((status) => (
-      <span
-        key={status.name}
-        className={activeTab === status.name ? "active" : ""}
-        onClick={() => setActiveTab(status.name)}
-      >
-        {status.name} ({status.count})
-      </span>
-    ))}
-  </nav>
-);
+function Tabs({ statuses, activeTab, setActiveTab }) {
+  return (
+    <nav className="tabs">
+      {statuses.map((status) => (
+        <span
+          key={status.name}
+          className={activeTab === status.name ? "active" : ""}
+          onClick={() => setActiveTab(status.name)}
+        >
+          {status.name} ({status.count})
+        </span>
+      ))}
+    </nav>
+  );
+}
 
-const Card = ({ feedback, onUpvote }) => (
-  <div className="card">
-    <span className="status">🔴 {feedback.status}</span>
-    <h3>{feedback.title}</h3>
-    <p>{feedback.description}</p>
-    <div className="tags">
-      <span className="tag">{feedback.category}</span>
+function Card({ feedback, onUpvote }) {
+  return (
+    <div className="card">
+      <span className="status">🔴 {feedback.status}</span>
+      <h3>{feedback.title}</h3>
+      <p>{feedback.description}</p>
+      <div className="tags">
+        <span className="tag">{feedback.category}</span>
+      </div>
+      <div className="interactions">
+        <span className="upvote" onClick={() => onUpvote(feedback.id)}>
+          <i className="fas fa-chevron-up"></i> {feedback.upvotes}
+        </span>
+        <span className="comments">
+          <i className="fas fa-comment"></i> {feedback.comments.length}
+        </span>
+      </div>
     </div>
-    <div className="interactions">
-      <span className="upvote" onClick={() => onUpvote(feedback.id)}>
-        <i className="fas fa-chevron-up"></i> {feedback.upvotes}
-      </span>
-      <span className="comments">
-        <i className="fas fa-comment"></i> {feedback.comments.length}
-      </span>
-    </div>
-  </div>
-);
+  );
+}
 
 export default Roadmap;
