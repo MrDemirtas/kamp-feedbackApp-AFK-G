@@ -1,16 +1,25 @@
 .container {
   margin: auto;
-  background: #F2F4FE;
+  background: #f2f4fe;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-header {
+.roadmap-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #3b3f64;
   color: white;
   padding: 10px 15px;
+}
+.header-left {
+  h1 {
+    font-family: Jost;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 26.01px;
+    letter-spacing: -0.25px;
+  }
 }
 .back-btn {
   color: white;
@@ -80,15 +89,15 @@ header {
 }
 main {
   padding: 24px;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
   gap: 16px;
 }
 .card {
   background: white;
   padding: 22px 24px;
   border-radius: 10px;
-  width: 327px;
+  /* width: 327px; */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .card-text {
@@ -158,4 +167,13 @@ main {
 }
 .upvote i {
   color: #4661e6;
+}
+
+@media screen and (min-width: 768px) {
+  .roadmap-header {
+    margin: 56px 40px 32px 39px;
+    border-radius: 10px;
+    padding: 27px 32px;
+  }
+ 
 }

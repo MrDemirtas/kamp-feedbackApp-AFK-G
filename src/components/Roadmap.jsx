@@ -93,14 +93,17 @@ function Roadmap() {
 
 function Header({ onAddFeedback }) {
   return (
-    <header>
+    <div className="roadmap-header"> 
+      <div className="header-left">
       <a href="#" className="back-btn">
         <i className="fas fa-arrow-left"></i> Go Back
       </a>
+      <h1>Roadmap</h1>
+      </div>
       <button className="add-feedback" onClick={onAddFeedback}>
         + Add Feedback
       </button>
-    </header>
+    </div>
   );
 }
 
