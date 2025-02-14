@@ -1,6 +1,7 @@
 import "../css/feedbackdetail.css";
-import { useContext, useState, Fragment, useEffect } from "react";
+
 import { Data, Route } from "../App";
+import { Fragment, useContext, useEffect, useState } from "react";
 
 export default function FeedbackDetail() {
   const { data, setData } = useContext(Data);
@@ -58,7 +59,7 @@ export default function FeedbackDetail() {
   return (
     <div className="feedback-detail-container">
       <div className="feedback-detail-header">
-        <a href="/">Go back</a>
+        <a href="#/">Go back</a>
         <a href={`#/edit-feedback/${currentFeedback.id}`}>Edit Feedback</a>
       </div>
       <div className="card">

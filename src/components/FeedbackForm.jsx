@@ -54,7 +54,7 @@ export default function FeedbackForm({ isEdit = false }) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formObj = Object.fromEntries(formData);
-
+    const id = isEdit ? edittingFeedback.id : crypto.randomUUID();
     if (isEdit) {
       if (edittingFeedback.status !== formStatus.value) {
         data.statuses.find((x) => x.name === edittingFeedback.status).count--;
@@ -66,7 +66,7 @@ export default function FeedbackForm({ isEdit = false }) {
       edittingFeedback.description = formObj.description;
     } else {
       const newFeedbackObj = {
-        id: crypto.randomUUID(),
+        id,
         title: formObj.title,
         description: formObj.description,
         category: formCategory.value,
@@ -79,11 +79,13 @@ export default function FeedbackForm({ isEdit = false }) {
       data.statuses.find((x) => x.name === "Planned").count++;
     }
     setData({ ...data });
+    location.hash = `/feedback/${id}`;
   }
 
   function handleDelete() {
     dialogRef.current.close();
     data.feedbacks = data.feedbacks.filter((feedback) => feedback.id !== edittingFeedback.id);
+    data.statuses.find((x) => x.name === edittingFeedback.status).count--;
     setData({ ...data });
     location.hash = "/";
   }
