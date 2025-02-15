@@ -1,10 +1,10 @@
 import "../css/feedbackdetail.css";
-
-import { Data, Route } from "../App";
+import { Data, Route, ScreenSize } from "../App";
 import { Fragment, useContext, useEffect, useState } from "react";
 
 export default function FeedbackDetail() {
   const { data, setData } = useContext(Data);
+  const screenSize = useContext(ScreenSize);
   const route = useContext(Route);
   const [newComment, setNewComment] = useState('');
   const [reply, setReply] = useState('');
@@ -59,17 +59,25 @@ export default function FeedbackDetail() {
   return (
     <div className="feedback-detail-container">
       <div className="feedback-detail-header">
-        <a href="#/">Go back</a>
+        <a href="#/">Go back <img src="/images/right-arrow.svg" alt="" /></a>
         <a href={`#/edit-feedback/${currentFeedback.id}`}>Edit Feedback</a>
       </div>
-      <div className="card">
-        <h4>{currentFeedback.title}</h4>
-        <p>{currentFeedback.description}</p>
-        <button>{currentFeedback.category}</button>
-        <div className="card-footer">
-          <span>{currentFeedback.upvotes}</span>
-          <span>{currentFeedback.comments?.length}</span>
+      <div className="card-info">
+        <div className="card-content">
+          <div className="card-header">
+            {screenSize >= 768 && <span>{currentFeedback.upvotes} <img src="/images/up-arrow.svg" alt="" /></span>}
+            <div>
+              <h4>{currentFeedback.title}</h4>
+              <p>{currentFeedback.description}</p>
+              <button>{currentFeedback.category}</button>
+            </div>
+          </div>
+          <div className="card-footer">
+            {screenSize >= 320 && screenSize < 768 && <span>{currentFeedback.upvotes} <img src="/images/up-arrow.svg" alt="" /></span>}
+            <span className="bg">{currentFeedback.comments?.length} <img src="/images/comment.svg" alt="" /></span>
+          </div>
         </div>
+
       </div>
       <div className="feedback-comments">
         <h3>{currentFeedback.comments?.length} Comments</h3>
