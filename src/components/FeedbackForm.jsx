@@ -3,6 +3,8 @@ import "../css/feedbackForm.css";
 import { Data, Route } from "../App";
 import { useContext, useEffect, useRef, useState } from "react";
 
+import toast from "react-hot-toast";
+
 export default function FeedbackForm({ isEdit = false }) {
   const { data, setData } = useContext(Data);
   const route = useContext(Route);
@@ -80,6 +82,7 @@ export default function FeedbackForm({ isEdit = false }) {
     }
     setData({ ...data });
     location.hash = `/feedback/${id}`;
+    toast.success(isEdit ? "Feedback updated successfully!" : "Feedback added successfully!");
   }
 
   function handleDelete() {
@@ -88,6 +91,7 @@ export default function FeedbackForm({ isEdit = false }) {
     data.statuses.find((x) => x.name === edittingFeedback.status).count--;
     setData({ ...data });
     location.hash = "/";
+    toast.success("Feedback deleted successfully!");
   }
 
   return (

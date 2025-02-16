@@ -21,11 +21,13 @@
     letter-spacing: -0.25px;
   }
 }
+
 .back-btn {
   color: white;
   text-decoration: none;
   font-size: 14px;
 }
+
 .add-feedback {
   background: #ad1fea;
   color: white;

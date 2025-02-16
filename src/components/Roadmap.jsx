@@ -5,39 +5,8 @@ import { useContext, useEffect, useState } from "react";
 import { Data } from "../App";
 
 function Roadmap() {
-  const initialData = {
-    currentUser: {
-      id: 1,
-      name: "Alex",
-      username: "@alex",
-      image: "images/user-images/user-alex.jpg",
-    },
-    feedbacks: [
-      {
-        id: 7,
-        title: "One-click portfolio generation",
-        description: "Add ability to create professional looking portfolio from profile.",
-        category: "Feature",
-        upvotes: 62,
-        status: "InProgress",
-        comments: [],
-      },
-    ],
-    statuses: [
-      { name: "Planned", count: 3 },
-      { name: "InProgress", count: 6 },
-      { name: "Live", count: 1 },
-    ],
-  };
-
-  const [data, setData] = useState(initialData);
+  const { data } = useContext(Data);
   const [activeTab, setActiveTab] = useState("InProgress");
-
-  useEffect(() => {
-    fetch("/data/feedback-data.json")
-      .then((response) => response.json())
-      .then((json) => setData(json));
-  }, []);
 
   return (
     <div className="container">
@@ -64,12 +33,12 @@ function Header() {
   return (
     <div className="roadmap-header">
       <div className="header-left">
-        <a href="#" className="back-btn">
+        <a href="#/" className="back-btn">
           <i className="fas fa-arrow-left"></i> Go Back
         </a>
         <h1>Roadmap</h1>
       </div>
-      <button className="add-feedback" onClick={() => location.hash = "/new-feedback"}>
+      <button className="add-feedback" onClick={() => (location.hash = "/new-feedback")}>
         + Add Feedback
       </button>
     </div>
@@ -113,7 +82,7 @@ function Card({ feedback }) {
         <span className={"upvote" + (data.currentUser.myUpvotes.includes(feedback.id) ? " active" : "")} onClick={handleUpvote}>
           <i className="fas fa-chevron-up"></i> {feedback.upvotes}
         </span>
-        <span className="comments">
+        <span className="comments" onClick={() => location.hash = `/feedback/${feedback.id}`}>
           <i className="fas fa-comment"></i> {feedback.comments.length}
         </span>
       </div>
