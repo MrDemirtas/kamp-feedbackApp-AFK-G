@@ -12,24 +12,27 @@ export default function App() {
   const [route, setRoute] = useState(location.hash.substring(1) || "/");
 
   useEffect(() => {
-    fetch("/data/feedback-data.json")
-      .then((response) => response.json())
-      .then((json) => setData(json));
+    if (localStorage.data) {
+      setData(JSON.parse(localStorage.data));
+    } else {
+      fetch("/data/feedback-data.json")
+        .then((response) => response.json())
+        .then((json) => setData(json));
+    }
 
     window.addEventListener("resize", () => setScreenSize(window.innerWidth));
     window.addEventListener("hashchange", () => setRoute(location.hash.substring(1) || "/"));
   }, []);
 
+  useEffect(() => {
+    localStorage.data = JSON.stringify(data);
+  }, [data]);
+
   return (
     <Route.Provider value={route}>
-      <Toaster 
-        position="top-center"
-        reverseOrder={false}
-      />
+      <Toaster position="top-center" reverseOrder={false} />
       <ScreenSize.Provider value={screenSize}>
-        <Data.Provider value={{ data, setData }}>
-          {data && getPage(route)}
-        </Data.Provider>
+        <Data.Provider value={{ data, setData }}>{data && getPage(route)}</Data.Provider>
       </ScreenSize.Provider>
     </Route.Provider>
   );

@@ -55,7 +55,7 @@ body {
     line-height: 23.12px;
     color: #647196;
     &:hover {
-      color: #AD1FEA;
+      color: #ad1fea;
     }
   }
 }
@@ -98,6 +98,9 @@ body {
   font-size: 18px;
   grid-column: 1 / -1;
   cursor: pointer;
+  &:hover {
+    color: #4661E6;
+  }
 }
 
 .feedback-item p:nth-child(2) {
@@ -166,6 +169,13 @@ body {
   font-size: 18px;
   line-height: 26.01px;
   letter-spacing: -0.25px;
+}
+
+.sort-by:hover {
+  color: rgba(242, 244, 254, 0.75);
+  > button {
+    color: rgba(242, 244, 254, 0.75);
+  }
 }
 
 @media screen and (min-width: 768px) {

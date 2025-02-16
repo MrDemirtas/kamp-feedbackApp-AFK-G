@@ -183,6 +183,9 @@
       background-color: #4661e6;
       color: #fff;
     }
+    &:hover {
+      background-color: #CFD7FF;
+    }
   }
 }
 
@@ -231,5 +234,8 @@
     line-height: 18.79px;
     letter-spacing: 0px;
     color: #4661e6;
+    &:hover {
+      color: #8397F8;
+    }
   }
 }

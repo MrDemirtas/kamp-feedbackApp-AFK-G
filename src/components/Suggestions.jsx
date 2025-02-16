@@ -51,7 +51,7 @@ export default function Suggestions() {
   useEffect(() => {
     setSortDropdownMenu(false);
   }, [sortBy]);
-  
+
   return (
     <div className="suggestions-container">
       <Header selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
@@ -67,9 +67,15 @@ export default function Suggestions() {
             Sort by:
             <button onClick={() => setSortDropdownMenu(!sortDropdownMenu)}>
               {sortBy}
-              <svg width="10" height="7" viewBox="0 0 10 7" fill="#fff" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 1L5 5L9 1" strokeWidth="2" />
-              </svg>
+              {sortDropdownMenu ? (
+                <svg width="9" height="7" viewBox="0 0 9 7" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 6L4 2L8 6" strokeWidth="2" />
+                </svg>
+              ) : (
+                <svg width="10" height="7" viewBox="0 0 10 7" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L5 5L9 1" strokeWidth="2" />
+                </svg>
+              )}
             </button>
             {sortDropdownMenu && (
               <div className="sort-dropdownMenu">
@@ -102,7 +108,6 @@ export default function Suggestions() {
                 <h4 onClick={() => (location.hash = `/feedback/${x.id}`)}>{x.title}</h4>
                 <p>{x.description}</p>
                 <p>{x.category}</p>
-                {/* <div className="item-upvotes-comment"> */}
                 <p className={data.currentUser.myUpvotes.includes(x.id) ? "active" : ""} onClick={() => handleUpvote(x.id)}>
                   <svg width="9" height="7" viewBox="0 0 9 7" fill="#4661E6" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 6L4 2L8 6" strokeWidth="2" />
@@ -113,7 +118,6 @@ export default function Suggestions() {
                   <img src="\public\images\comment.svg" alt="" />
                   {x.comments.length}
                 </a>
-                {/* </div> */}
               </div>
             ))}
         </div>
