@@ -107,10 +107,10 @@ main {
   background: white;
   padding: 22px 24px;
   border-radius: 10px;
-  /* width: 327px; */
   h3 {
     margin-top: 16px;
     margin-bottom: 8px;
+    cursor: pointer;
   }
   &.Planned {
     box-shadow: 0 -6px #f49f85;
