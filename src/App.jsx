@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
+import { Toaster } from "react-hot-toast";
 import { getPage } from "./helper";
 
 export const Data = createContext(null);
@@ -21,6 +22,10 @@ export default function App() {
 
   return (
     <Route.Provider value={route}>
+      <Toaster 
+        position="top-center"
+        reverseOrder={false}
+      />
       <ScreenSize.Provider value={screenSize}>
         <Data.Provider value={{ data, setData }}>
           {data && getPage(route)}
