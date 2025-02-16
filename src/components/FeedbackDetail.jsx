@@ -1,9 +1,10 @@
 import "../css/feedbackdetail.css";
-import { useContext, useState, Fragment, useEffect } from "react";
-import { Data, Route } from "../App";
+import { Data, Route, ScreenSize } from "../App";
+import { Fragment, useContext, useEffect, useState } from "react";
 
 export default function FeedbackDetail() {
   const { data, setData } = useContext(Data);
+  const screenSize = useContext(ScreenSize);
   const route = useContext(Route);
   const [newComment, setNewComment] = useState('');
   const [reply, setReply] = useState('');
@@ -22,6 +23,19 @@ export default function FeedbackDetail() {
   useEffect(() => {
     setReplyContent('');
   }, [reply]);
+
+  const handleUpvote = () => {
+    if (data.currentUser.myUpvotes.includes(currentFeedback.id)) {
+      data.currentUser.myUpvotes = data.currentUser.myUpvotes.filter(x => x !== currentFeedback.id)
+      data.feedbacks.find(x => x.id === currentFeedback.id).upvotes--;
+    } else {
+      data.currentUser.myUpvotes.push(currentFeedback.id);
+      data.feedbacks.find(x => x.id === currentFeedback.id).upvotes++;
+    }
+    setData({ ...data });
+    console.log('render')
+    console.log(data.currentUser.myUpvotes.includes(currentFeedback.id))
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -58,17 +72,33 @@ export default function FeedbackDetail() {
   return (
     <div className="feedback-detail-container">
       <div className="feedback-detail-header">
-        <a href="#/">Go back</a>
+        <a href="#/">Go back <img src="/images/right-arrow.svg" alt="" /></a>
         <a href={`#/edit-feedback/${currentFeedback.id}`}>Edit Feedback</a>
       </div>
-      <div className="card">
-        <h4>{currentFeedback.title}</h4>
-        <p>{currentFeedback.description}</p>
-        <button>{currentFeedback.category}</button>
-        <div className="card-footer">
-          <span>{currentFeedback.upvotes}</span>
-          <span>{currentFeedback.comments?.length}</span>
+      <div className="card-info">
+        <div className="card-content">
+          <div className="card-header">
+            {screenSize >= 768 && <span onClick={handleUpvote} className={'detailUpvote' + (data.currentUser.myUpvotes.includes(currentFeedback.id) ? ' active' : '')}>{currentFeedback.upvotes}
+              <svg width="9" height="7" viewBox="0 0 9 7" fill="#4661E6" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 6L4 2L8 6" strokeWidth="2" />
+              </svg>
+            </span>}
+            <div>
+              <h4>{currentFeedback.title}</h4>
+              <p>{currentFeedback.description}</p>
+              <button>{currentFeedback.category}</button>
+            </div>
+          </div>
+          <div className="card-footer">
+            {screenSize < 768 && <span onClick={handleUpvote} className={'detailUpvote' + (data.currentUser.myUpvotes.includes(currentFeedback.id) ? ' active' : '')}>{currentFeedback.upvotes}
+              <svg width="9" height="7" viewBox="0 0 9 7" fill="#4661E6" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 6L4 2L8 6" strokeWidth="2" />
+              </svg>
+            </span>}
+            <span className="bg">{currentFeedback.comments?.length} <img src="/images/comment.svg" alt="" /></span>
+          </div>
         </div>
+
       </div>
       <div className="feedback-comments">
         <h3>{currentFeedback.comments?.length} Comments</h3>
@@ -91,7 +121,7 @@ export default function FeedbackDetail() {
             {reply === comment.id && (
               <form onSubmit={(e) => handleReplySubmit(e, comment.id, comment.username)} autoComplete="off" className="reply-form">
                 <textarea name="userReply" id="" value={replyContent} onChange={(e) => setReplyContent(e.target.value)} className="text-area"></textarea>
-                <button>Send</button>
+                <button>{screenSize >= 768 ? 'Post Reply' : 'Send'}</button>
               </form>
             )}
             {comment.replies?.length > 0 && (
@@ -114,7 +144,7 @@ export default function FeedbackDetail() {
                     {reply === x.id && (
                       <form onSubmit={(e) => handleReplySubmit(e, comment.id, x.username)} autoComplete="off" className="reply-form">
                         <textarea name="userReply" id="" value={replyContent} onChange={(e) => setReplyContent(e.target.value)} className="text-area"></textarea>
-                        <button>Send</button>
+                        <button>{screenSize >= 768 ? 'Post Reply' : 'Send'}</button>
                       </form>
                     )}
                   </Fragment>

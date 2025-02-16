@@ -1,5 +1,7 @@
 .feedback-detail-container {
   padding: 24px;
+  max-width: 730px;
+  margin-inline: auto;
 }
 
 .feedback-detail-header {
@@ -28,10 +30,11 @@
   }
 }
 
-.card {
+.card-info {
   background: #ffffff;
   border-radius: 10px;
   padding: 24px;
+  margin-top: 24px;
 
   h4 {
     font-weight: 700;
@@ -70,12 +73,34 @@
     line-height: 18.79px;
     letter-spacing: -0.18px;
     color: #3a4374;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 8px;
   }
+}
 
-  span:nth-child(1) {
-    background: #f2f4fe;
-    border-radius: 10px;
-    padding: 7px 8px;
+.card-header {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.detailUpvote {
+  background-color: #f2f4fe;
+  border-radius: 10px;
+  padding: 7px 8px;
+  cursor: pointer;
+  &:hover{
+    background-color: #CFD7FF;
+  }
+}
+
+.detailUpvote.active {
+  color: #ffffff;
+  background-color: #4661e6;
+  svg {
+    fill: #ffffff;
   }
 }
 
@@ -266,7 +291,7 @@
   padding: 24px;
 }
 
-.text-area,
+.text-area:focus,
 textarea:focus {
   border: 1px solid #4661e6;
 }
@@ -299,4 +324,177 @@ textarea:focus {
 .comment-header img {
   width: 40px;
   border-radius: 50%;
+}
+
+.feedback-detail-header {
+  a:nth-child(1) {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 15px;
+  }
+}
+
+@media (width >= 768px) {
+  .feedback-detail-container {
+    padding: 40px;
+  }
+
+  .card-info {
+    padding: 28px 32px;
+    margin-block: 24px;
+  }
+
+  .reply-form button:nth-child(2) {
+    min-width: 117px;
+  }
+
+  .feedback-comments {
+    padding: 32px;
+  }
+
+  .add-comment {
+    padding: 32px;
+  }
+
+  .card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-header {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+
+    span:nth-child(1) {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 8px;
+      align-items: center;
+    }
+  }
+
+  .bg {
+    background: none !important;
+  }
+
+  .add-comment-footer button:hover {
+    background: #c75af6;
+  }
+
+  .comment button:hover,
+  .reply button:hover {
+    text-decoration: underline;
+  }
+
+  .feedback-detail-header a:nth-child(2):hover {
+    background: #7c91f9;
+  }
+
+  .add-comment textarea::placeholder {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21.68px;
+    letter-spacing: 0px;
+  }
+
+  .comment h4 {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20.23px;
+    letter-spacing: -0.19px;
+  }
+
+  .comment span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20.23px;
+    letter-spacing: 0px;
+  }
+
+  .feedback-comments p {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21.68px;
+    letter-spacing: 0px;
+  }
+
+  .card-info h4 {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 26.01px;
+    letter-spacing: -0.25px;
+  }
+
+  .card-info p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23.12px;
+    letter-spacing: 0px;
+  }
+
+  .card-info span {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 23.12px;
+    letter-spacing: -0.22px;
+  }
+
+  .reply-form button:nth-child(2) {
+    min-width: 117px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20.23px;
+    letter-spacing: 0px;
+    padding: 12px 24px;
+  }
+
+  .add-comment textarea {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21.68px;
+    letter-spacing: 0px;
+  }
+
+  .add-comment-footer span {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21.68px;
+    letter-spacing: 0px;
+  }
+
+  .add-comment textarea {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21.68px;
+    letter-spacing: 0px;
+  }
+
+  .add-comment-footer button {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20.23px;
+    letter-spacing: 0px;
+    padding: 12px 24px;
+  }
+
+  .feedback-detail-header a:nth-child(2) {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20.23px;
+    letter-spacing: 0px;
+    padding: 12px 24px;
+  }
+
+  .feedback-detail-header a:nth-child(1):hover {
+    text-decoration: underline;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .feedback-detail-container {
+    padding: 80px 0;
+  }
 }

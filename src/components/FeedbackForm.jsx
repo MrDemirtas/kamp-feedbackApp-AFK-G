@@ -3,6 +3,8 @@ import "../css/feedbackForm.css";
 import { Data, Route } from "../App";
 import { useContext, useEffect, useRef, useState } from "react";
 
+import toast from "react-hot-toast";
+
 export default function FeedbackForm({ isEdit = false }) {
   const { data, setData } = useContext(Data);
   const route = useContext(Route);
@@ -54,7 +56,7 @@ export default function FeedbackForm({ isEdit = false }) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formObj = Object.fromEntries(formData);
-
+    const id = isEdit ? edittingFeedback.id : crypto.randomUUID();
     if (isEdit) {
       if (edittingFeedback.status !== formStatus.value) {
         data.statuses.find((x) => x.name === edittingFeedback.status).count--;
@@ -66,7 +68,7 @@ export default function FeedbackForm({ isEdit = false }) {
       edittingFeedback.description = formObj.description;
     } else {
       const newFeedbackObj = {
-        id: crypto.randomUUID(),
+        id,
         title: formObj.title,
         description: formObj.description,
         category: formCategory.value,
@@ -75,17 +77,21 @@ export default function FeedbackForm({ isEdit = false }) {
         comments: [],
       };
 
-      data.feedbacks.push(newFeedbackObj);
+      data.feedbacks = [newFeedbackObj, ...data.feedbacks];
       data.statuses.find((x) => x.name === "Planned").count++;
     }
     setData({ ...data });
+    location.hash = `/feedback/${id}`;
+    toast.success(isEdit ? "Feedback updated successfully!" : "Feedback added successfully!");
   }
 
   function handleDelete() {
     dialogRef.current.close();
     data.feedbacks = data.feedbacks.filter((feedback) => feedback.id !== edittingFeedback.id);
+    data.statuses.find((x) => x.name === edittingFeedback.status).count--;
     setData({ ...data });
     location.hash = "/";
+    toast.success("Feedback deleted successfully!");
   }
 
   return (

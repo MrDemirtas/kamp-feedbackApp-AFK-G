@@ -1,15 +1,15 @@
 body {
-  background-color: #F7F8FD;
+  background-color: #f7f8fd;
 }
-
-
 
 .select-feedback {
   display: flex;
   align-items: center;
   padding: 8px 24px 8px 24px;
   margin-bottom: 32px;
-  background-color: #373F68;
+  background-color: #373f68;
+  position: relative;
+  gap: 40px;
 }
 
 .select-feedback label {
@@ -18,41 +18,51 @@ body {
   font-weight: 400;
   font-size: 13px;
   line-height: 18.79px;
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  > button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: transparent;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20.23px;
+    color: #f2f4fe;
+    border: none;
+  }
 }
 
-.select-feedback select {
-  background: transparent;
-  color: white;
-  border: none;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  outline: none;
+.sort-dropdownMenu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 255px;
+  top: calc(100% + 30px);
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 10px 40px -7px #373f6859;
+  button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 24px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(58, 67, 116, 0.15);
+    font-size: 16px;
+    line-height: 23.12px;
+    color: #647196;
+    &:hover {
+      color: #ad1fea;
+    }
+  }
 }
 
-.select-feedback select option {
-  background-color: white;
-  color: #647196;
-  padding: 12px 24px;
-  font-size: 16px;
-  font-weight: 400;
-  cursor: pointer;
-}
-
-.select-feedback select option:nth-child(1) {
-  color: rgb(178, 177, 177);
-}
-
-.select-feedback select option:hover,
-.select-feedback select option:checked {
-  background-color: #AD1FEA;
-  color: white;
-}
-
-
-.select-feedback button {
-  background-color: #AD1FEA;
-  color: #F2F4FE;
+.select-feedback > button {
+  background-color: #ad1fea;
+  color: #f2f4fe;
   border: none;
   padding: 10px 16px;
   border-radius: 10px;
@@ -63,14 +73,13 @@ body {
   margin-left: auto;
 }
 
-.select-feedback button:hover {
-  background-color: #C75AF6;
+.select-feedback > button:hover {
+  background-color: #c75af6;
 }
 
 .feedbacks-container {
-  max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding-inline: 20px;
 }
 
 .feedback-item {
@@ -78,21 +87,26 @@ body {
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
 }
 
 .feedback-item h4 {
-  color: #3A4374;
-  margin: 0 0 10px 0;
+  color: #3a4374;
   font-size: 18px;
+  grid-column: 1 / -1;
   cursor: pointer;
+  &:hover {
+    color: #4661E6;
+  }
 }
 
-.feedback-item p {
+.feedback-item p:nth-child(2) {
   color: #647196;
-  margin: 0 0 15px 0;
   font-size: 16px;
+  grid-column: 1 / -1;
 }
 
 .feedback-item p:first-of-type {
@@ -101,34 +115,32 @@ body {
 
 .feedback-item p:nth-child(3) {
   padding: 5px 16px 6px 16px;
-  background-color: #F2F4FF;
-  color: #4661E6;
+  background-color: #f2f4ff;
+  color: #4661e6;
   width: fit-content;
   border-radius: 10px;
   font-weight: 600;
+  grid-column: 1 / -1;
 }
 
-
-.item-upvotes-comment {
+.feedback-item p:nth-child(4) {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-.item-upvotes-comment p {
-  display: flex;
-  align-items: center;
+  justify-self: start;
   gap: 5px;
   margin: 0;
   padding: 8px 12px;
-  background: #F2F4FF;
+  background: #f2f4ff;
   border-radius: 10px;
-  color: #4661E6;
+  color: #4661e6;
   font-weight: 700;
   cursor: pointer;
   user-select: none;
+  &:hover {
+    background-color: #cfd7ff;
+  }
   &.active {
-    background-color: #4661E6;
+    background-color: #4661e6;
     color: #fff;
 
     svg {
@@ -137,56 +149,105 @@ body {
   }
 }
 
-.item-upvotes-comment a {
+.feedback-item a {
   display: flex;
   align-items: center;
+  justify-self: end;
   gap: 4px;
   cursor: pointer;
   user-select: none;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 18.79px;
+  letter-spacing: -0.18px;
+  color: #3a4374;
 }
 
-.null-page {
-  margin-inline: 24px;
-  padding: 76px 24px;
-  background-color: #fff;
-  border-radius: 10px;
+.suggestions-length {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  img{
-    margin-bottom: 39px;
-  }
-  h4{
-    margin-bottom: 14px;
+  gap: 16px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26.01px;
+  letter-spacing: -0.25px;
+}
 
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 26.01px;
-    letter-spacing: -0.25px;
-    text-align: center;    
-    color: #3A4374;
+.sort-by:hover {
+  color: rgba(242, 244, 254, 0.75);
+  > button {
+    color: rgba(242, 244, 254, 0.75);
   }
-  p{
-    margin-bottom: 24px;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 18.79px;
-    letter-spacing: 0px;
-    text-align: center;
-    color: #3A4374;
+}
+
+@media screen and (min-width: 768px) {
+  .suggestions-container {
+    padding: 56px 40px 40px 40px;
   }
-  button{
-    background-color: #AD1FEA;
-    color: #F2F4FE;
-    border: none;
-    padding: 10px 16px;
+
+  .select-feedback {
+    padding: 14px 16px 14px 24px;
     border-radius: 10px;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 13px;
-    line-height: 18.79px;
   }
-  button:hover {
-    background-color: #C75AF6;
+
+  .feedback-item {
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: repeat(3, auto);
+    column-gap: 40px;
+  }
+
+  .feedback-item h4 {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .feedback-item p:nth-child(2) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .feedback-item p:nth-child(3) {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .feedback-item p:nth-child(4) {
+    flex-direction: column;
+    align-self: center;
+    grid-column: 1;
+    grid-row: 1 / -1;
+  }
+
+  .feedback-item a {
+    align-self: center;
+    grid-column: 3;
+    grid-row: 1 / -1;
+  }
+
+  .feedbacks-container {
+    padding: 0;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .suggestions-container {
+    display: grid;
+    grid-template-columns: 255px 1fr;
+    gap: 30px;
+    width: 1110px;
+    margin-inline: auto;
+  }
+
+  .header-tablet {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: repeat(3, max-content);
+    gap: 24px !important;
+    height: inherit !important;
+  }
+
+  .header-tablet-title-content {
+    height: 137px;
   }
 }
