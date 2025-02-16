@@ -10,22 +10,23 @@ export default function Suggestions() {
   const screenSize = useContext(ScreenSize);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [suggestions, setSuggestions] = useState(data.feedbacks);
-  const [sortBy, setSortBy] = useState("");
+  const [sortBy, setSortBy] = useState("Most Upvotes");
+  const [sortDropdownMenu, setSortDropdownMenu] = useState(false);
 
   useEffect(() => {
     if (suggestions.length > 0) {
       let sortedSuggestions = [...suggestions];
       switch (sortBy) {
-        case "mostUpvotes":
+        case "Most Upvotes":
           sortedSuggestions.sort((a, b) => b.upvotes - a.upvotes);
           break;
-        case "leastUpvotes":
+        case "Least Upvotes":
           sortedSuggestions.sort((a, b) => a.upvotes - b.upvotes);
           break;
-        case "mostComments":
+        case "Most Comments":
           sortedSuggestions.sort((a, b) => b.comments.length - a.comments.length);
           break;
-        case "leastComments":
+        case "Least Comments":
           sortedSuggestions.sort((a, b) => a.comments.length - b.comments.length);
           break;
         default:
@@ -47,6 +48,10 @@ export default function Suggestions() {
     setData({ ...data });
   };
 
+  useEffect(() => {
+    setSortDropdownMenu(false);
+  }, [sortBy]);
+  
   return (
     <div className="suggestions-container">
       <Header selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
@@ -58,15 +63,34 @@ export default function Suggestions() {
               <span>{suggestions.filter((x) => x.category.includes(selectedCategory)).length} Suggestions</span>
             </div>
           )}
-          <label htmlFor="sort">
+          <label className="sort-by">
             Sort by:
-            <select name="sort" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-              <option value="changeSort">Change sort</option>
-              <option value="mostUpvotes">Most Upvotes</option>
-              <option value="leastUpvotes">Least Upvotes</option>
-              <option value="mostComments">Most Comments</option>
-              <option value="leastComments">Least Comments</option>
-            </select>
+            <button onClick={() => setSortDropdownMenu(!sortDropdownMenu)}>
+              {sortBy}
+              <svg width="10" height="7" viewBox="0 0 10 7" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L5 5L9 1" strokeWidth="2" />
+              </svg>
+            </button>
+            {sortDropdownMenu && (
+              <div className="sort-dropdownMenu">
+                <button onClick={() => setSortBy("Most Upvotes")}>
+                  Most Upvotes
+                  {sortBy === "Most Upvotes" ? <img src="/images/dropdown-tick.svg" /> : ""}
+                </button>
+                <button onClick={() => setSortBy("Least Upvotes")}>
+                  Least Upvotes
+                  {sortBy === "Least Upvotes" ? <img src="/images/dropdown-tick.svg" /> : ""}
+                </button>
+                <button onClick={() => setSortBy("Most Comments")}>
+                  Most Comments
+                  {sortBy === "Most Comments" ? <img src="/images/dropdown-tick.svg" /> : ""}
+                </button>
+                <button onClick={() => setSortBy("Least Comments")}>
+                  Least Comments
+                  {sortBy === "Least Comments" ? <img src="/images/dropdown-tick.svg" /> : ""}
+                </button>
+              </div>
+            )}
           </label>
           <button onClick={() => (location.hash = `/new-feedback`)}>+ Add Feedback</button>
         </div>

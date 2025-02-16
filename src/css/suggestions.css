@@ -18,34 +18,49 @@ body {
   font-weight: 400;
   font-size: 13px;
   line-height: 18.79px;
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  > button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: transparent;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20.23px;
+    color: #f2f4fe;
+    border: none;
+  }
 }
 
-.select-feedback select {
-  background: transparent;
-  color: white;
-  border: none;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  outline: none;
+.sort-dropdownMenu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 255px;
+  top: calc(100% + 30px);
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 10px 40px -7px #373f6859;
+  button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 24px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(58, 67, 116, 0.15);
+    font-size: 16px;
+    line-height: 23.12px;
+    color: #647196;
+    &:hover {
+      color: #AD1FEA;
+    }
+  }
 }
 
-.select-feedback select option {
-  background-color: white;
-  color: #647196;
-  padding: 12px 24px;
-  font-size: 16px;
-  font-weight: 400;
-  cursor: pointer;
-}
-
-.select-feedback select option:hover,
-.select-feedback select option:checked {
-  background-color: #ad1fea;
-  color: white;
-}
-
-.select-feedback button {
+.select-feedback > button {
   background-color: #ad1fea;
   color: #f2f4fe;
   border: none;
@@ -58,7 +73,7 @@ body {
   margin-left: auto;
 }
 
-.select-feedback button:hover {
+.select-feedback > button:hover {
   background-color: #c75af6;
 }
 
@@ -151,6 +166,9 @@ body {
   font-size: 18px;
   line-height: 26.01px;
   letter-spacing: -0.25px;
+}
+
+.sort-by {
 }
 
 @media screen and (min-width: 768px) {
