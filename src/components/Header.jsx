@@ -8,16 +8,12 @@ export default function Header({ selectedCategory, setSelectedCategory }) {
 
   return (
   <>
-    {screenSize > 768 ? 
-      <HeaderTablet /> 
+    {screenSize >= 768 ? 
+      <HeaderTablet selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} /> 
       : 
-      <HeaderMobile
-        selectedCategory={selectedCategory} 
-        setSelectedCategory={setSelectedCategory} 
-      />
-    }
+      <HeaderMobile selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />}
   </>
-  );
+  )
 }
 
 function HeaderMobile({ selectedCategory, setSelectedCategory }) {
@@ -40,16 +36,11 @@ function HeaderMobile({ selectedCategory, setSelectedCategory }) {
         <div className="hamburger-menu-container">
           <div className="hamburger-menu-contents">
             <div className="hamburger-menu-categories">
-              <button 
-                className={"hamburger-menu-category" + (selectedCategory === "All" ? " active" : "")} 
-                onClick={() => setSelectedCategory("All")}>
+              <button className={"hamburger-menu-category" + (selectedCategory === "" ? " active" : "")} onClick={() => setSelectedCategory("")}>
                 All
               </button>
               {data.categories.map((category, index) => (
-                <button 
-                  key={index} 
-                  className={"hamburger-menu-category" + (selectedCategory === category ? " active" : "")}
-                  onClick={() => setSelectedCategory(category)}>
+                <button key={index} className={"hamburger-menu-category" + (selectedCategory === category ? " active" : "")} onClick={() => setSelectedCategory(category)}>
                   {category}
                 </button>
               ))}
@@ -77,8 +68,39 @@ function HeaderMobile({ selectedCategory, setSelectedCategory }) {
   );
 }
 
-function HeaderTablet() {
+function HeaderTablet({ selectedCategory, setSelectedCategory }) {
   const { data } = useContext(Data);
 
-  return <header></header>;
+  return (
+    <header className="header-tablet">
+      <div className="header-tablet-title-content">
+        <h1>Frontend Mentor</h1>
+        <p>Feedback Board</p>
+      </div>
+      <div className="header-tablet-categories">
+        <button className={"header-tablet-category" + (selectedCategory === "" ? " active" : "")} onClick={() => setSelectedCategory("")}>All</button>
+        {data.categories.map((category, index) => (
+          <button key={index} onClick={() => setSelectedCategory(category)} className={"header-tablet-category" + (selectedCategory === category ? " active" : "")}>
+            {category}
+          </button>
+        ))}
+      </div>
+      <div className="header-tablet-roadmap">
+        <div className="header-tablet-roadmap-title">
+          <h2>Roadmap</h2>
+          <a href="#/roadmap">View</a>
+        </div>
+        <ul>
+          {data.statuses.map((roadmap, index) => (
+            <li key={index}>
+              <div className="hamburger-menu-roadmap-item">
+                <span>{roadmap.name}</span>
+                <span>{roadmap.count}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </header>
+  );
 }

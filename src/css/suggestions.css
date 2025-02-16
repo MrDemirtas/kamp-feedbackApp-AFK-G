@@ -1,16 +1,15 @@
 body {
-  background-color: #F7F8FD;
+  background-color: #f7f8fd;
 }
-
-
 
 .select-feedback {
   display: flex;
   align-items: center;
   padding: 8px 24px 8px 24px;
   margin-bottom: 32px;
-  background-color: #373F68;
+  background-color: #373f68;
   position: relative;
+  gap: 40px;
 }
 
 .select-feedback label {
@@ -42,14 +41,13 @@ body {
 
 .select-feedback select option:hover,
 .select-feedback select option:checked {
-  background-color: #AD1FEA;
+  background-color: #ad1fea;
   color: white;
 }
 
-
 .select-feedback button {
-  background-color: #AD1FEA;
-  color: #F2F4FE;
+  background-color: #ad1fea;
+  color: #f2f4fe;
   border: none;
   padding: 10px 16px;
   border-radius: 10px;
@@ -61,13 +59,12 @@ body {
 }
 
 .select-feedback button:hover {
-  background-color: #C75AF6;
+  background-color: #c75af6;
 }
 
 .feedbacks-container {
-  max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding-inline: 20px;
 }
 
 .feedback-item {
@@ -75,52 +72,53 @@ body {
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
 }
 
 .feedback-item h4 {
-  color: #3A4374;
-  margin: 0 0 10px 0;
+  color: #3a4374;
   font-size: 18px;
+  grid-column: 1 / -1;
+  cursor: pointer;
 }
 
-.feedback-item p {
+.feedback-item p:nth-child(2) {
   color: #647196;
-  margin: 0 0 15px 0;
   font-size: 16px;
+  grid-column: 1 / -1;
 }
 
 .feedback-item p:nth-child(3) {
   padding: 5px 16px 6px 16px;
-  background-color: #F2F4FF;
-  color: #4661E6;
+  background-color: #f2f4ff;
+  color: #4661e6;
   width: fit-content;
   border-radius: 10px;
   font-weight: 600;
+  grid-column: 1 / -1;
 }
 
-
-.item-upvotes-comment {
+.feedback-item p:nth-child(4) {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-.item-upvotes-comment p {
-  display: flex;
-  align-items: center;
+  justify-self: start;
   gap: 5px;
   margin: 0;
   padding: 8px 12px;
-  background: #F2F4FF;
+  background: #f2f4ff;
   border-radius: 10px;
-  color: #4661E6;
+  color: #4661e6;
   font-weight: 700;
   cursor: pointer;
   user-select: none;
+  &:hover {
+    background-color: #cfd7ff;
+  }
   &.active {
-    background-color: #4661E6;
+    background-color: #4661e6;
     color: #fff;
 
     svg {
@@ -129,10 +127,97 @@ body {
   }
 }
 
-.item-upvotes-comment a {
+.feedback-item a {
   display: flex;
   align-items: center;
+  justify-self: end;
   gap: 4px;
   cursor: pointer;
   user-select: none;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 18.79px;
+  letter-spacing: -0.18px;
+  color: #3a4374;
+}
+
+.suggestions-length {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26.01px;
+  letter-spacing: -0.25px;
+}
+
+@media screen and (min-width: 768px) {
+  .suggestions-container {
+    padding: 56px 40px 40px 40px;
+  }
+
+  .select-feedback {
+    border-radius: 10px;
+  }
+
+  .feedback-item {
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: repeat(3, auto);
+    column-gap: 40px;
+  }
+
+  .feedback-item h4 {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .feedback-item p:nth-child(2) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .feedback-item p:nth-child(3) {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .feedback-item p:nth-child(4) {
+    flex-direction: column;
+    align-self: center;
+    grid-column: 1;
+    grid-row: 1 / -1;
+  }
+
+  .feedback-item a {
+    align-self: center;
+    grid-column: 3;
+    grid-row: 1 / -1;
+  }
+
+  .feedbacks-container {
+    padding: 0;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .suggestions-container {
+    display: grid;
+    grid-template-columns: 255px 1fr;
+    gap: 30px;
+    width: 1110px;
+    margin-inline: auto;
+  }
+
+  .header-tablet {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: repeat(3, max-content);
+    gap: 24px !important;
+    height: inherit !important;
+  }
+
+  .header-tablet-title-content {
+    height: 137px;
+  }
 }

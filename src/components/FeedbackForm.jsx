@@ -77,7 +77,7 @@ export default function FeedbackForm({ isEdit = false }) {
         comments: [],
       };
 
-      data.feedbacks.push(newFeedbackObj);
+      data.feedbacks = [newFeedbackObj, ...data.feedbacks];
       data.statuses.find((x) => x.name === "Planned").count++;
     }
     setData({ ...data });

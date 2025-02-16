@@ -208,6 +208,9 @@ main {
   display: flex;
   align-items: center;
   gap: 10px;
+  &:hover {
+    background-color: #cfd7ff;
+  }
   i {
     color: #4661e6;
   }
