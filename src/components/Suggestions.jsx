@@ -10,7 +10,7 @@ export default function Suggestions() {
   const screenSize = useContext(ScreenSize);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [suggestions, setSuggestions] = useState(data.feedbacks);
-  const [sortBy, setSortBy] = useState("Most Upvotes");
+  const [sortBy, setSortBy] = useState("");
   const [sortDropdownMenu, setSortDropdownMenu] = useState(false);
 
   useEffect(() => {
@@ -68,7 +68,7 @@ export default function Suggestions() {
           <label className="sort-by">
             Sort by:
             <button onClick={() => setSortDropdownMenu(!sortDropdownMenu)}>
-              {sortBy}
+              {sortBy || "Select Option"}
               {sortDropdownMenu ? (
                 <svg width="9" height="7" viewBox="0 0 9 7" fill="#fff" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0 6L4 2L8 6" strokeWidth="2" />
@@ -81,6 +81,10 @@ export default function Suggestions() {
             </button>
             {sortDropdownMenu && (
               <div className="sort-dropdownMenu">
+                <button onClick={() => setSortBy("")}>
+                  Select Option
+                  {sortBy === "" ? <img src="/images/dropdown-tick.svg" /> : ""}
+                </button>
                 <button onClick={() => setSortBy("Most Upvotes")}>
                   Most Upvotes
                   {sortBy === "Most Upvotes" ? <img src="/images/dropdown-tick.svg" /> : ""}
