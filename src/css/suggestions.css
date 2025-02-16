@@ -159,6 +159,7 @@ body {
   }
 
   .select-feedback {
+    padding: 14px 16px 14px 24px;
     border-radius: 10px;
   }
 

@@ -1,4 +1,4 @@
-.container {
+.roadmap-container {
   margin: auto;
   padding-bottom: 24px;
 }
@@ -104,13 +104,19 @@ main {
   gap: 16px;
 }
 .roadmap-card {
+  display: grid;
+  align-items: start;
+  justify-items: start;
   background: white;
   padding: 22px 24px;
   border-radius: 10px;
+  height: 250px;
   h3 {
-    margin-top: 16px;
-    margin-bottom: 8px;
     cursor: pointer;
+    font-size: 13px;
+    line-height: 18.79px;
+    letter-spacing: -0.18px;
+    color: #3a4374;
   }
   &.Planned {
     box-shadow: 0 -6px #f49f85;
@@ -122,26 +128,8 @@ main {
     box-shadow: 0 -6px #62bcfa;
   }
   p {
-    margin-bottom: 24px;
-  }
-}
-.card-text {
-  margin-top: 16px;
-  margin-bottom: 8px;
-  h3 {
-    font-family: Jost;
-    font-weight: 700;
     font-size: 13px;
     line-height: 18.79px;
-    letter-spacing: -0.18px;
-    color: #3a4374;
-  }
-  p {
-    font-family: Jost;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 18.79px;
-    letter-spacing: 0px;
     color: #647196;
   }
 }
@@ -171,10 +159,7 @@ main {
   }
 }
 
-.tags {
-  margin-bottom: 16px;
-}
-.tags .tag {
+.tag {
   background-color: #f2f4ff;
   padding: 5px 10px;
   border-radius: 5px;
@@ -186,9 +171,10 @@ main {
   letter-spacing: 0px;
 }
 .interactions {
+  justify-self: stretch;
   display: flex;
   justify-content: space-between;
-  margin-top: 16px;
+  align-self: self-end;
 }
 .upvote,
 .comments {
@@ -231,10 +217,117 @@ main {
   }
 }
 
+.roadmap-tablet-grid-group {
+  padding-inline: 40px;
+  margin-top: 32px;
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.roadmap-tablet-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.roadmap-tablet-grid-title {
+  display: grid;
+  gap: 4px;
+  h2 {
+    font-size: 14px;
+    line-height: 20.23px;
+    letter-spacing: -0.19px;
+    color: #3a4374;
+  }
+  p {
+    font-size: 14px;
+    line-height: 20.23px;
+    color: #647196;
+  }
+}
+
+.roadmap-tablet-card-item {
+  display: grid;
+  gap: 16px;
+}
+
 @media screen and (min-width: 768px) {
   .roadmap-header {
     margin: 56px 40px 32px 39px;
     border-radius: 10px;
     padding: 27px 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .roadmap-container {
+    width: 1110px;
+    margin-inline: auto;
+  }
+
+  .header-left {
+    h1 {
+      font-size: 24px;
+      line-height: 34.68px;
+      letter-spacing: -0.33px;
+    }
+  }
+
+  .add-feedback {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20.23px;
+  }
+
+  .roadmap-header {
+    margin-bottom: 48px;
+  }
+
+  .roadmap-tablet-grid-title {
+    h2 {
+      font-size: 18px;
+      line-height: 26.01px;
+      letter-spacing: -0.25px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 23.12px;
+    }
+  }
+
+  .roadmap-status {
+    font-size: 16px;
+    line-height: 23.12px;
+  }
+
+  .roadmap-card {
+    h3 {
+      font-size: 18px;
+      line-height: 26.01px;
+      letter-spacing: -0.25px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 23.12px;
+    }
+  }
+
+  .upvote,
+  .comments {
+    font-size: 16px;
+    line-height: 23.12px;
+    letter-spacing: -0.22px;
+  }
+  .comments{
+    gap: 8px;
+  }
+
+  .roadmap-tablet-grid-group{
+    gap: 30px;
+  }
+
+  .roadmap-tablet-card-item {
+    gap: 24px;
   }
 }

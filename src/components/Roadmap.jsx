@@ -1,15 +1,19 @@
 import "../css/roadmap.css";
 
-import { useContext, useEffect, useState } from "react";
+import { Data, ScreenSize } from "../App";
+import { useContext, useState } from "react";
 
-import { Data } from "../App";
+export default function Roadmap() {
+  const screenSize = useContext(ScreenSize);
+  return screenSize < 768 ? <RoadmapMobile /> : <RoadmapDesktop />;
+}
 
-function Roadmap() {
+function RoadmapMobile() {
   const { data } = useContext(Data);
   const [activeTab, setActiveTab] = useState("InProgress");
 
   return (
-    <div className="container">
+    <div className="roadmap-container">
       <Header />
       <Tabs statuses={data.statuses} activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className="selected-tab">
@@ -73,16 +77,14 @@ function Card({ feedback }) {
   return (
     <div className={"roadmap-card" + ` ${feedback.status}`}>
       <span className={"roadmap-status" + ` ${feedback.status}`}>{feedback.status}</span>
-      <h3 onClick={() => location.hash = `/feedback/${feedback.id}`}>{feedback.title}</h3>
+      <h3 onClick={() => (location.hash = `/feedback/${feedback.id}`)}>{feedback.title}</h3>
       <p>{feedback.description}</p>
-      <div className="tags">
-        <span className="tag">{feedback.category}</span>
-      </div>
+      <span className="tag">{feedback.category}</span>
       <div className="interactions">
         <span className={"upvote" + (data.currentUser.myUpvotes.includes(feedback.id) ? " active" : "")} onClick={handleUpvote}>
           <i className="fas fa-chevron-up"></i> {feedback.upvotes}
         </span>
-        <span className="comments" onClick={() => location.hash = `/feedback/${feedback.id}`}>
+        <span className="comments" onClick={() => (location.hash = `/feedback/${feedback.id}`)}>
           <i className="fas fa-comment"></i> {feedback.comments.length}
         </span>
       </div>
@@ -90,4 +92,31 @@ function Card({ feedback }) {
   );
 }
 
-export default Roadmap;
+function RoadmapDesktop() {
+  const { data } = useContext(Data);
+  const statusesDescriptions = ["Ideas prioritized for research", "Currently being developed", "Currently being developed"];
+  return (
+    <div className="roadmap-container">
+      <Header />
+      <div className="roadmap-tablet-grid-group">
+        {data.statuses.map((status, i) => (
+          <div key={status.name} className="roadmap-tablet-grid">
+            <div className="roadmap-tablet-grid-title">
+              <h2>
+                {status.name} ({status.count})
+              </h2>
+              <p>{statusesDescriptions[i]}</p>
+            </div>
+            <div className="roadmap-tablet-card-item">
+              {data.feedbacks
+                .filter((f) => f.status === status.name)
+                .map((feedback) => (
+                  <Card key={feedback.id} feedback={feedback} />
+                ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
