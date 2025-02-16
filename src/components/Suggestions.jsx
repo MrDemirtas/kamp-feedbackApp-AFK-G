@@ -52,6 +52,8 @@ export default function Suggestions() {
     setSortDropdownMenu(false);
   }, [sortBy]);
 
+  const filteredSuggestions = suggestions.filter((x) => x.category.includes(selectedCategory));
+
   return (
     <div className="suggestions-container">
       <Header selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
@@ -101,9 +103,8 @@ export default function Suggestions() {
           <button onClick={() => (location.hash = `/new-feedback`)}>+ Add Feedback</button>
         </div>
         <div className="feedbacks-container">
-          {suggestions
-            .filter((x) => x.category.includes(selectedCategory))
-            .map((x) => (
+          {filteredSuggestions.length > 0 ? (
+            filteredSuggestions.map((x) => (
               <div key={x.id} className="feedback-item">
                 <h4 onClick={() => (location.hash = `/feedback/${x.id}`)}>{x.title}</h4>
                 <p>{x.description}</p>
@@ -119,7 +120,17 @@ export default function Suggestions() {
                   {x.comments.length}
                 </a>
               </div>
-            ))}
+            ))
+          ) : (
+            <div className="empty-page">
+              <img src="/images/null-page.svg" />
+              <div className="empty-page-title">
+                <h2>There is no feedback yet.</h2>
+                <p>Got a suggestion? Found a bug that needs to be squashed? We love hearing about new ideas to improve our app.</p>
+              </div>
+              <button onClick={() => (location.hash = `/new-feedback`)}>+ Add Feedback</button>
+            </div>
+          )}
         </div>
       </div>
     </div>
