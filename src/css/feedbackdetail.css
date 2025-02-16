@@ -340,6 +340,10 @@ textarea:focus {
     margin-block: 24px;
   }
 
+  .reply-form button:nth-child(2) {
+    min-width: 117px;
+  }
+
   .feedback-comments {
     padding: 32px;
   }
@@ -382,6 +386,105 @@ textarea:focus {
 
   .feedback-detail-header a:nth-child(2):hover {
     background: #7c91f9;
+  }
+
+  .add-comment textarea::placeholder {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21.68px;
+    letter-spacing: 0px;
+  }
+
+  .comment h4 {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20.23px;
+    letter-spacing: -0.19px;
+  }
+
+  .comment span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20.23px;
+    letter-spacing: 0px;
+  }
+
+  .feedback-comments p {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21.68px;
+    letter-spacing: 0px;
+  }
+
+  .card-info h4 {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 26.01px;
+    letter-spacing: -0.25px;
+  }
+
+  .card-info p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23.12px;
+    letter-spacing: 0px;
+  }
+
+  .card-info span {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 23.12px;
+    letter-spacing: -0.22px;
+  }
+
+  .reply-form button:nth-child(2) {
+    min-width: 117px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20.23px;
+    letter-spacing: 0px;
+    padding: 12px 24px;
+  }
+
+  .add-comment textarea {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21.68px;
+    letter-spacing: 0px;
+  }
+
+  .add-comment-footer span {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21.68px;
+    letter-spacing: 0px;
+  }
+
+  .add-comment textarea {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21.68px;
+    letter-spacing: 0px;
+  }
+
+  .add-comment-footer button {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20.23px;
+    letter-spacing: 0px;
+    padding: 12px 24px;
+  }
+
+  .feedback-detail-header a:nth-child(2) {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20.23px;
+    letter-spacing: 0px;
+    padding: 12px 24px;
+  }
+
+  .feedback-detail-header a:nth-child(1):hover {
+    text-decoration: underline;
   }
 }
 

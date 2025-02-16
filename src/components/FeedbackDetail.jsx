@@ -121,7 +121,7 @@ export default function FeedbackDetail() {
             {reply === comment.id && (
               <form onSubmit={(e) => handleReplySubmit(e, comment.id, comment.username)} autoComplete="off" className="reply-form">
                 <textarea name="userReply" id="" value={replyContent} onChange={(e) => setReplyContent(e.target.value)} className="text-area"></textarea>
-                <button>Send</button>
+                <button>{screenSize >= 768 ? 'Post Reply' : 'Send'}</button>
               </form>
             )}
             {comment.replies?.length > 0 && (
@@ -144,7 +144,7 @@ export default function FeedbackDetail() {
                     {reply === x.id && (
                       <form onSubmit={(e) => handleReplySubmit(e, comment.id, x.username)} autoComplete="off" className="reply-form">
                         <textarea name="userReply" id="" value={replyContent} onChange={(e) => setReplyContent(e.target.value)} className="text-area"></textarea>
-                        <button>Send</button>
+                        <button>{screenSize >= 768 ? 'Post Reply' : 'Send'}</button>
                       </form>
                     )}
                   </Fragment>
