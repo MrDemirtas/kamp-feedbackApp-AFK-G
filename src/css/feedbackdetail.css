@@ -83,11 +83,19 @@
   display: flex;
   gap: 40px;
   align-items: center;
+}
 
-  span:nth-child(1) {
-    background: #f2f4fe;
-    border-radius: 10px;
-    padding: 7px 8px;
+.detailUpvote {
+  background-color: #f2f4fe;
+  border-radius: 10px;
+  padding: 7px 8px;
+}
+
+.detailUpvote.active {
+  color: #ffffff;
+  background-color: #4661e6;
+  svg {
+    fill: #ffffff;
   }
 }
 
@@ -95,12 +103,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  span:nth-child(1) {
-    background: #f2f4fe;
-    border-radius: 10px;
-    padding: 7px 8px;
-  }
 }
 
 .feedback-comments {
