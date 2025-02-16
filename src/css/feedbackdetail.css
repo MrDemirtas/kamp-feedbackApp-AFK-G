@@ -1,5 +1,7 @@
 .feedback-detail-container {
   padding: 24px;
+  max-width: 730px;
+  margin-inline: auto;
 }
 
 .feedback-detail-header {
@@ -378,5 +380,11 @@ textarea:focus {
 
   .feedback-detail-header a:nth-child(2):hover {
     background: #7c91f9;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .feedback-detail-container {
+    padding: 80px 0;
   }
 }
