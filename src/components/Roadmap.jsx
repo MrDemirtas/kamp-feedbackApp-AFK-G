@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
 import "../css/roadmap.css";
+
+import { useContext, useEffect, useState } from "react";
+
+import { Data } from "../App";
 
 function Roadmap() {
   const initialData = {
@@ -13,8 +16,7 @@ function Roadmap() {
       {
         id: 7,
         title: "One-click portfolio generation",
-        description:
-          "Add ability to create professional looking portfolio from profile.",
+        description: "Add ability to create professional looking portfolio from profile.",
         category: "Feature",
         upvotes: 62,
         status: "InProgress",
@@ -37,42 +39,9 @@ function Roadmap() {
       .then((json) => setData(json));
   }, []);
 
-  function handleAddFeedback() {
-    const newFeedback = {
-      id: Date.now(),
-      title: "New Feature",
-      description: "Description of the new feature.",
-      category: "Feature",
-      upvotes: 0,
-      status: activeTab,
-      comments: [],
-    };
-    setData((prevData) => {
-      const updatedStatuses = prevData.statuses.map((status) =>
-        status.name === activeTab ? { ...status, count: status.count + 1 } : status
-      );
-      return {
-        ...prevData,
-        feedbacks: [...prevData.feedbacks, newFeedback],
-        statuses: updatedStatuses,
-      };
-    });
-  }
-
-  function handleUpvote(id) {
-    setData((prevData) => ({
-      ...prevData,
-      feedbacks: prevData.feedbacks.map((feedback) =>
-        feedback.id === id
-          ? { ...feedback, upvotes: feedback.upvotes + 1 }
-          : feedback
-      ),
-    }));
-  }
-
   return (
     <div className="container">
-      <Header onAddFeedback={handleAddFeedback} />
+      <Header />
       <Tabs statuses={data.statuses} activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className="selected-tab">
         <h2>
@@ -84,23 +53,23 @@ function Roadmap() {
         {data.feedbacks
           .filter((f) => f.status === activeTab)
           .map((feedback) => (
-            <Card key={feedback.id} feedback={feedback} onUpvote={handleUpvote} />
+            <Card key={feedback.id} feedback={feedback} />
           ))}
       </main>
     </div>
   );
 }
 
-function Header({ onAddFeedback }) {
+function Header() {
   return (
-    <div className="roadmap-header"> 
+    <div className="roadmap-header">
       <div className="header-left">
-      <a href="#" className="back-btn">
-        <i className="fas fa-arrow-left"></i> Go Back
-      </a>
-      <h1>Roadmap</h1>
+        <a href="#" className="back-btn">
+          <i className="fas fa-arrow-left"></i> Go Back
+        </a>
+        <h1>Roadmap</h1>
       </div>
-      <button className="add-feedback" onClick={onAddFeedback}>
+      <button className="add-feedback" onClick={() => location.hash = "/new-feedback"}>
         + Add Feedback
       </button>
     </div>
@@ -111,11 +80,7 @@ function Tabs({ statuses, activeTab, setActiveTab }) {
   return (
     <nav className="tabs">
       {statuses.map((status) => (
-        <span
-          key={status.name}
-          className={activeTab === status.name ? "active" : ""}
-          onClick={() => setActiveTab(status.name)}
-        >
+        <span key={status.name} className={activeTab === status.name ? "active" : ""} onClick={() => setActiveTab(status.name)}>
           {status.name} ({status.count})
         </span>
       ))}
@@ -123,17 +88,29 @@ function Tabs({ statuses, activeTab, setActiveTab }) {
   );
 }
 
-function Card({ feedback, onUpvote }) {
+function Card({ feedback }) {
+  const { data, setData } = useContext(Data);
+  const handleUpvote = () => {
+    if (data.currentUser.myUpvotes.includes(feedback.id)) {
+      data.currentUser.myUpvotes = data.currentUser.myUpvotes.filter((x) => x !== feedback.id);
+      feedback.upvotes--;
+    } else {
+      data.currentUser.myUpvotes.push(feedback.id);
+      feedback.upvotes++;
+    }
+    setData({ ...data });
+  };
+
   return (
-    <div className="card">
-      <span className="status">🔴 {feedback.status}</span>
-      <h3>{feedback.title}</h3>
+    <div className={"roadmap-card" + ` ${feedback.status}`}>
+      <span className={"roadmap-status" + ` ${feedback.status}`}>{feedback.status}</span>
+      <h3 onClick={() => location.hash = `/feedback/${feedback.id}`}>{feedback.title}</h3>
       <p>{feedback.description}</p>
       <div className="tags">
         <span className="tag">{feedback.category}</span>
       </div>
       <div className="interactions">
-        <span className="upvote" onClick={() => onUpvote(feedback.id)}>
+        <span className={"upvote" + (data.currentUser.myUpvotes.includes(feedback.id) ? " active" : "")} onClick={handleUpvote}>
           <i className="fas fa-chevron-up"></i> {feedback.upvotes}
         </span>
         <span className="comments">
