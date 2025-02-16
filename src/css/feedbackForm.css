@@ -41,10 +41,10 @@
   section {
     position: relative;
     display: grid;
-    gap: 16px;
     input,
     > button,
     textarea {
+      margin-top: 16px;
       background-color: #f7f8fd;
       border-radius: 5px;
       border: none;
@@ -59,6 +59,9 @@
       cursor: pointer;
       &:hover {
         border: 1px solid #4661e6;
+      }
+      &.invalid {
+        border: 1px solid #d73737;
       }
     }
     > button {
@@ -205,6 +208,13 @@
   &:hover {
     background-color: #a3a8ad;
   }
+}
+
+.empty-msg {
+  color: #d73737;
+  font-size: 14px;
+  line-height: 20.23px;
+  margin-top: 2px;
 }
 
 @media screen and (min-width: 768px) {

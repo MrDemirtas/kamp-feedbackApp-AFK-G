@@ -20,6 +20,10 @@ export default function FeedbackForm({ isEdit = false }) {
     show: false,
     value: isEdit && edittingFeedback ? edittingFeedback.status : "Planned",
   });
+  const [emptyMsg, setEmptyMsg] = useState({
+    title: false,
+    description: false,
+  });
 
   useEffect(() => {
     if (isEdit) {
@@ -54,6 +58,16 @@ export default function FeedbackForm({ isEdit = false }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!titleRef.current.value.trim() || !descriptionRef.current.value.trim()) {
+      setEmptyMsg({
+        title: !titleRef.current.value.trim(),
+        description: !descriptionRef.current.value.trim(),
+      });
+      return;
+    } else {
+      setEmptyMsg({ title: false, description: false });
+    }
+    
     const formData = new FormData(e.target);
     const formObj = Object.fromEntries(formData);
     const id = isEdit ? edittingFeedback.id : crypto.randomUUID();
@@ -111,7 +125,8 @@ export default function FeedbackForm({ isEdit = false }) {
               <h4>Feedback Title</h4>
               <p>Add a short, descriptive headline</p>
             </div>
-            <input ref={titleRef} required type="text" name="title" defaultValue={isEdit ? edittingFeedback.title : ""} />
+            <input ref={titleRef} className={emptyMsg.title ? "invalid" : ""} type="text" name="title" defaultValue={isEdit ? edittingFeedback.title : ""} />
+            {emptyMsg.title && <p className="empty-msg">Title cannot be empty</p>}
           </section>
           <section>
             <div className="feedback-form-input-text">
@@ -160,7 +175,8 @@ export default function FeedbackForm({ isEdit = false }) {
               <h4>Feedback Detail</h4>
               <p>Include any specific comments on what should be improved, added, etc.</p>
             </div>
-            <textarea ref={descriptionRef} required name="description" rows={5} defaultValue={isEdit ? edittingFeedback.description : ""}></textarea>
+            <textarea ref={descriptionRef} className={emptyMsg.description ? "invalid" : ""} name="description" rows={5} defaultValue={isEdit ? edittingFeedback.description : ""}></textarea>
+            {emptyMsg.description && <p className="empty-msg">Title cannot be empty</p>}
           </section>
           <div className="feedback-form-btn-group">
             <button className="feedback-form-btn-submit" type="submit">
