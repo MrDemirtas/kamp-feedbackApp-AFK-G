@@ -120,7 +120,7 @@ export default function Suggestions() {
                   {x.upvotes}
                 </p>
                 <a href={`#/feedback/${x.id}`}>
-                  <img src="\public\images\comment.svg" alt="" />
+                  <img src="\images\comment.svg" alt="" />
                   {x.comments.length}
                 </a>
               </div>
