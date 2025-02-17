@@ -3,6 +3,7 @@ body:has(.hamburger-menu-container) {
 }
 
 .header-mobile {
+  position: relative;
   padding: 16px 24px;
   background: radial-gradient(128.88% 128.88% at 103.9% -10.39%, #e84d70 0%, #a337f6 53.09%, #28a7ed 100%);
   display: flex;
@@ -32,7 +33,7 @@ body:has(.hamburger-menu-container) {
 .hamburger-menu-container {
   position: absolute;
   right: 0;
-  bottom: 0;
+  top: 100%;
   width: 100%;
   /* height: calc(100vh - 72.48px); */
   background-color: rgba(0, 0, 0, 0.5);

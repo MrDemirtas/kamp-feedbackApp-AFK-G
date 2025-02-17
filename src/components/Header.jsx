@@ -30,39 +30,39 @@ function HeaderMobile({ selectedCategory, setSelectedCategory }) {
           <input type="checkbox" checked={hamburger} onChange={() => setHamburger(!hamburger)} />
           <img src={hamburger ? "/images/hamburger-icon-cross.svg" : "/images/hamburger-icon.svg"} alt="" />
         </label>
-      </header>
-      {hamburger && (
-        <div className="hamburger-menu-container" style={{ height: hamburgerMenuHeight }}>
-          <div className="hamburger-menu-contents">
-            <div className="hamburger-menu-categories">
-              <button className={"hamburger-menu-category" + (selectedCategory === "" ? " active" : "")} onClick={() => setSelectedCategory("")}>
-                All
-              </button>
-              {data.categories.map((category, index) => (
-                <button key={index} className={"hamburger-menu-category" + (selectedCategory === category ? " active" : "")} onClick={() => setSelectedCategory(category)}>
-                  {category}
+        {hamburger && (
+          <div className="hamburger-menu-container" style={{ height: hamburgerMenuHeight }}>
+            <div className="hamburger-menu-contents">
+              <div className="hamburger-menu-categories">
+                <button className={"hamburger-menu-category" + (selectedCategory === "" ? " active" : "")} onClick={() => setSelectedCategory("")}>
+                  All
                 </button>
-              ))}
-            </div>
-            <div className="hamburger-menu-roadmap">
-              <div className="hamburger-menu-roadmap-header">
-                <h2>Roadmap</h2>
-                <a href="#/roadmap">View</a>
-              </div>
-              <ul>
-                {data.statuses.map((roadmap, index) => (
-                  <li key={index}>
-                    <div className="hamburger-menu-roadmap-item">
-                      <span>{roadmap.name}</span>
-                      <span>{roadmap.count}</span>
-                    </div>
-                  </li>
+                {data.categories.map((category, index) => (
+                  <button key={index} className={"hamburger-menu-category" + (selectedCategory === category ? " active" : "")} onClick={() => setSelectedCategory(category)}>
+                    {category}
+                  </button>
                 ))}
-              </ul>
+              </div>
+              <div className="hamburger-menu-roadmap">
+                <div className="hamburger-menu-roadmap-header">
+                  <h2>Roadmap</h2>
+                  <a href="#/roadmap">View</a>
+                </div>
+                <ul>
+                  {data.statuses.map((roadmap, index) => (
+                    <li key={index}>
+                      <div className="hamburger-menu-roadmap-item">
+                        <span>{roadmap.name}</span>
+                        <span>{roadmap.count}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </header>
     </>
   );
 }
