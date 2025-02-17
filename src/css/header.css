@@ -34,7 +34,7 @@ body:has(.hamburger-menu-container) {
   right: 0;
   bottom: 0;
   width: 100%;
-  height: calc(100vh - 72.46px);
+  /* height: calc(100vh - 72.48px); */
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
 }
